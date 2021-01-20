@@ -13,8 +13,8 @@ class RemoteCarsDataSource @Inject constructor(
     private val api: CarsAPI,
     private val mapper: Mapper<CarsDTO, CarEntity>
 ) : ObservableReadable<CarEntity>() {
-    override fun read(): Observable<Answer<CarEntity>> {
-        TODO("Not yet implemented")
+    override fun read(): Observable<Answer<CarEntity>> = api.getCarData().map {
+        Answer.Success(mapper.map(it))
     }
 
 }
