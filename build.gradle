@@ -29,6 +29,14 @@ buildscript {
             'junit'                  : '4.13.1',
             'extjunit'               : '1.1.2',
             'espressocore'           : '3.3.0',
+            'testRunner'             : "1.2.0",
+            'testRules'              : "1.2.0",
+            "assertjVersion"         : "3.14.0",
+            "assertjAndroidVersion"  : "1.1.1",
+            "mockitoinline"          : "3.2.4",
+            "mockitokotlin"          : "2.2.0",
+
+
     ]
 
     repositories {
@@ -43,6 +51,10 @@ buildscript {
 
 allprojects {
     repositories {
+        maven { url "https://www.jitpack.io" }
+        maven { url 'https://maven.google.com' }
+        maven { url "http://dl.bintray.com/twistedequations/maven" }
+        maven {url = 'https://repo.maven.apache.org/maven2'}
         google()
         jcenter()
     }

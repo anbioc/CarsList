@@ -49,9 +49,29 @@ dependencies {
     implementation "androidx.core:core-ktx:${versions.constraintlayout}"
     implementation "androidx.appcompat:appcompat:${versions.constraintlayout}"
     implementation "com.google.android.material:material:${versions.material}"
+
+    /** Junit*/
     testImplementation "junit:junit:${versions.junit}"
     androidTestImplementation "androidx.test.ext:junit:${versions.extjunit}"
+
+    /** Espresso*/
     androidTestImplementation "androidx.test.espresso:espresso-core:${versions.espressocore}"
+
+    /** Mockito*/
+    testImplementation "org.mockito:mockito-inline:${versions.mockitoinline}"
+    androidTestImplementation "org.mockito:mockito-inline:${versions.mockitoinline}"
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:${versions.mockitokotlin}"
+    androidTestImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:${versions.mockitokotlin}"
+
+    /** Test rules*/
+    androidTestImplementation "androidx.test:runner:${versions.testRunner}"
+    androidTestImplementation "androidx.test:rules:${versions.testRules}"
+
+    /** Assertions */
+    testImplementation "org.assertj:assertj-core:${versions.assertjVersion}"
+    testImplementation("com.squareup.assertj:assertj-android:${versions.assertjAndroidVersion}") {
+        exclude group: "xmlpull"
+    }
 
     /** Presentation */
     implementation "androidx.constraintlayout:constraintlayout:${versions.constraintlayout}"
@@ -89,7 +109,6 @@ dependencies {
     implementation "com.google.dagger:dagger-android-support:${versions.dagger}"
     kapt "com.google.dagger:dagger-compiler:${versions.dagger}"
     kapt "com.google.dagger:dagger-android-processor:${versions.dagger}"
-    implementation "com.squareup.inject:assisted-inject-annotations-dagger2:${versions.assistedInject}"
     kapt "com.squareup.inject:assisted-inject-processor-dagger2:${versions.assistedInject}"
 
     /** Extensions */

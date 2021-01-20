@@ -19,7 +19,7 @@ data class CarItemDTO(
     @SerializedName("ingress")
     val ingress: String,
     @SerializedName("tags")
-    val tags: List<Any>,
+    val tags: List<String>,
     @SerializedName("title")
     val title: String
 )
