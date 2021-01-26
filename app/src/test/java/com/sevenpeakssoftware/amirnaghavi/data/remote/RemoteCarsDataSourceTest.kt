@@ -31,7 +31,7 @@ class RemoteCarsDataSourceTest {
     lateinit var mockMapper: Mapper<CarsDTO, CarEntity>
 
     @InjectMocks
-    lateinit var remoteCarsDataSource: RemoteCarsDataSource
+    lateinit var subject: RemoteCarsDataSource
 
     lateinit var observer: TestObserver<Answer<CarEntity>>
 
@@ -61,7 +61,7 @@ class RemoteCarsDataSourceTest {
     when
      */
     private fun whenOnRead() {
-        observer = remoteCarsDataSource.read().test()
+        observer = subject.read().test()
     }
 
     /*
