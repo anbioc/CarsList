@@ -4,24 +4,24 @@ import io.reactivex.Observable
 
 interface BaseDataSource
 
-interface Readable<T>: BaseDataSource {
-    fun read(): T
+interface Readable<T, PARAM: Param>: BaseDataSource {
+    fun read(param: PARAM): T
 }
 
 interface Writeable<T>: BaseDataSource {
     fun write(t: T): Comparable<Boolean>
 }
 
-interface ReadableAndWriteable<T, R>: BaseDataSource{
-    fun read(): T
+interface ReadableAndWriteable<T, R, PARAM: Param>: BaseDataSource{
+    fun read(param: PARAM): T
     fun write(input: R)
 }
 
-abstract class ObservableReadable<T>: Readable<Observable<Answer<T>>>
+abstract class ObservableReadable<T, PARAM: Param>: Readable<Observable<Answer<T>>, PARAM>
 
 abstract class ObservableWriteable<T>: Writeable<T>
 
-abstract class ObservableReadableAndWriteable<T>: ReadableAndWriteable<Observable<Answer<T>>, T>
+abstract class ObservableReadableAndWriteable<T, PARAM: Param>: ReadableAndWriteable<Observable<Answer<T>>, T, PARAM>
 
 
 

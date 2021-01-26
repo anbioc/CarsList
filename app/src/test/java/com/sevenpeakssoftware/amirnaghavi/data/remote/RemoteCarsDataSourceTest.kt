@@ -3,6 +3,7 @@ package com.sevenpeakssoftware.amirnaghavi.data.remote
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.given
 import com.sevenpeakssoftware.amirnaghavi.base.Answer
+import com.sevenpeakssoftware.amirnaghavi.base.CarsParam
 import com.sevenpeakssoftware.amirnaghavi.base.Mapper
 import com.sevenpeakssoftware.amirnaghavi.data.CarsAPI
 import com.sevenpeakssoftware.amirnaghavi.data.dto.CarsDTO
@@ -28,12 +29,12 @@ class RemoteCarsDataSourceTest {
     lateinit var mockApi: CarsAPI
 
     @Mock
-    lateinit var mockMapper: Mapper<CarsDTO, CarEntity>
+    lateinit var mockMapper: Mapper<CarsDTO, List<CarEntity>>
 
     @InjectMocks
     lateinit var subject: RemoteCarsDataSource
 
-    lateinit var observer: TestObserver<Answer<CarEntity>>
+    lateinit var observer: TestObserver<Answer<List<CarEntity>>>
 
     @Test
     fun `givenApiDataAvailable and givenDataIsMapped whenOnRead thenResultIsAvailable`() {
@@ -48,7 +49,7 @@ class RemoteCarsDataSourceTest {
     given
      */
     private fun givenDataIsMapped() {
-        given(mockMapper.map(any())).willReturn(carEntity)
+        given(mockMapper.map(any())).willReturn(listOf(carEntity))
     }
 
     private fun givenApiDataAvailable() {
@@ -61,7 +62,7 @@ class RemoteCarsDataSourceTest {
     when
      */
     private fun whenOnRead() {
-        observer = subject.read().test()
+        observer = subject.read(CarsParam()).test()
     }
 
     /*
@@ -71,6 +72,6 @@ class RemoteCarsDataSourceTest {
     private fun thenResultIsAvailable() = observer.assertComplete()
         .assertNoErrors()
         .assertNoTimeout()
-        .assertValues(Answer.Success(carEntity))
+        .assertValues(Answer.Success(listOf(carEntity)))
 
 }

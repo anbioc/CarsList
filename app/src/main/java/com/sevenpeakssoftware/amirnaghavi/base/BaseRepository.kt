@@ -1,0 +1,25 @@
+package com.sevenpeakssoftware.amirnaghavi.base
+
+import io.reactivex.Observable
+
+interface BaseRepository<T, PARAM: Param> {
+    fun getResult(param: PARAM, strategy: RepositoryStrategy): T
+}
+
+abstract class ObservableRepository<T, PARAM: Param> : BaseRepository<Observable<Answer<T>>,PARAM> {
+
+    abstract fun getOffline(param: PARAM): Observable<Answer<T>>
+    abstract fun getRemote(param: PARAM): Observable<Answer<T>>
+
+    private fun getOfflineFirst(param: PARAM) =
+        Observable.concatArrayEagerDelayError(
+            getOffline(param), getRemote(param)
+        )
+
+    override fun getResult(param: PARAM, strategy: RepositoryStrategy): Observable<Answer<T>> =
+        when (strategy) {
+            RepositoryStrategy.OfflineFirst -> getOfflineFirst(param)
+            RepositoryStrategy.Remote -> getRemote(param)
+        }
+
+}

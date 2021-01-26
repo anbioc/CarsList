@@ -4,6 +4,7 @@ import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.given
 import com.nhaarman.mockitokotlin2.verify
 import com.sevenpeakssoftware.amirnaghavi.base.Answer
+import com.sevenpeakssoftware.amirnaghavi.base.CarsParam
 import com.sevenpeakssoftware.amirnaghavi.base.TwoWayMapper
 import com.sevenpeakssoftware.amirnaghavi.data.local.CarDao
 import com.sevenpeakssoftware.amirnaghavi.data.local.data.CarItemLocalEntity
@@ -79,7 +80,7 @@ class CarsLocalDataSourceTest {
      */
 
     private fun whenOnRead() {
-        testObserver = subject.read().test()
+        testObserver = subject.read(CarsParam()).test()
     }
 
     private fun whenOnWrite() {
