@@ -2,14 +2,16 @@ package com.sevenpeakssoftware.amirnaghavi.presentation
 
 import com.sevenpeakssoftware.amirnaghavi.base.*
 import com.sevenpeakssoftware.amirnaghavi.domain.entity.CarEntity
+import com.sevenpeakssoftware.amirnaghavi.presentation.event_contract.EventContractID
 import com.sevenpeakssoftware.amirnaghavi.presentation.event_handler.CarEventHandler
 import javax.inject.Inject
 
 class CarsViewModel @Inject constructor(
         private val useCase: ObservableUseCase<List<CarEntity>, CarsParam>
-) : BaseViewModel<CarState, CarEvent, CarsParam>() {
+) : BaseViewModel<CarState, GetCarInfoEvent, CarsParam>() {
 
-    override val eventHandlerManager: EventHandlerManager<CarState, CarsParam> = CarEventHandlerManager()
+    override val eventHandlerManager: CompositeEventHandler<CarState, CarsParam> = CarEventHandlerManager()
+    override val initState: CarState = CarState()
 
     init {
         eventHandlerManager.addHandler(CarEventHandler(compositeDisposable, useCase))
@@ -27,12 +29,8 @@ data class CarState(
     }
 }
 
-class CarEventContract : EventContract {
-    override val ID: String = javaClass.canonicalName
+class GetCarInfoEvent : ViewModelEvent{
+    override val ID: String = EventContractID.CAR_EVENT
 }
 
-class CarEvent : ViewModelEvent(CarEventContract()) {
-    override val ID: String = javaClass.canonicalName ?: "CarEvent"
-}
-
-class CarEventHandlerManager : EventHandlerManager<CarState, CarsParam>()
+class CarEventHandlerManager : CompositeEventHandler<CarState, CarsParam>()

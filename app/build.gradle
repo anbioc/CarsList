@@ -65,6 +65,8 @@ dependencies {
     /** Test rules*/
     androidTestImplementation "androidx.test:runner:${versions.testRunner}"
     androidTestImplementation "androidx.test:rules:${versions.testRules}"
+    testImplementation "androidx.arch.core:core-testing:2.1.0"
+
 
     /** Assertions */
     testImplementation "org.assertj:assertj-core:${versions.assertjVersion}"

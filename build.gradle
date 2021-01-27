@@ -23,7 +23,7 @@ buildscript {
             "rx2AandroidSchedulers"  : "2.0.0",
             "converterGson"          : "2.9.0",
             "retrofit2Rxjava2Adapter": "1.0.0",
-            'corektx'               : '1.3.2',
+            'corektx'                : '1.3.2',
             'appcompat'              : '1.2.0',
             'material'               : '1.2.1',
             'junit'                  : '4.13.1',
@@ -35,6 +35,7 @@ buildscript {
             "assertjAndroidVersion"  : "1.1.1",
             "mockitoinline"          : "3.2.4",
             "mockitokotlin"          : "2.2.0",
+            "coretesting"            : "2.1.0"
 
 
     ]
@@ -56,7 +57,7 @@ allprojects {
         google()
         jcenter()
         maven { url "http://dl.bintray.com/twistedequations/maven" }
-        maven {url = 'https://repo.maven.apache.org/maven2'}
+        maven { url = 'https://repo.maven.apache.org/maven2' }
     }
 }
 

@@ -1,23 +1,37 @@
 package com.sevenpeakssoftware.amirnaghavi.base
 
 import androidx.lifecycle.MutableLiveData
-import com.sevenpeakssoftware.amirnaghavi.presentation.CarState
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 
 
+/**
+ * Hosts the logic to handle incoming event either a network call or db transaction ot any other other logic.
+ */
 interface BaseEventHandler<STATE : ViewModelState, PARAM : Param> {
     fun isResponsibleTo(event: Any): Boolean
     fun handleEvent(param: PARAM, liveData: MutableLiveData<STATE>, initState: STATE)
+    val ID: String
 }
 
-abstract class EventHandler<EVENT : BaseViewModelEvent, STATE : ViewModelState, PARAM : Param, RESULT>(
-        private val compositeDisposable: CompositeDisposable, contract: EventContract) :
+abstract class EventHandler<EVENT : ViewModelEvent, STATE : ViewModelState, PARAM : Param, RESULT>(
+        private val compositeDisposable: CompositeDisposable) :
         BaseEventHandler<STATE, PARAM> {
-    val ID: String = contract.ID
+    /**
+     * The core logic will be implemented in this function.
+     */
     abstract fun triggerAction(param: PARAM, initState: STATE): Observable<Answer<RESULT>>
-    override fun isResponsibleTo(event: Any): Boolean = (ID == (event as BaseViewModelEvent).ID)
+
+    /**
+     * Checks weather current [EventHandler] is responsible to handle this event [ViewModelEvent] or not.
+     */
+    override fun isResponsibleTo(event: Any): Boolean = (ID == (event as ViewModelEvent).ID)
+
+    /**
+     * Wraps all necessary steps to handle the input event.
+     */
     override fun handleEvent(param: PARAM, liveData: MutableLiveData<STATE>, initState: STATE) {
+        onIdle(initState)
         compositeDisposable.add(triggerAction(param, initState).subscribe({
             when {
                 it.isSuccess() -> {
@@ -35,19 +49,30 @@ abstract class EventHandler<EVENT : BaseViewModelEvent, STATE : ViewModelState, 
         }))
     }
 
+    /**
+     * Prepares the [ViewModelState] when result is success.
+     */
     protected abstract fun onSuccess(answer: Answer<RESULT>, initState: STATE): STATE
+    /**
+     * Prepares the [ViewModelState] when result is failure.
+     */
     protected abstract fun onFailure(answer: Answer<RESULT>, initState: STATE): STATE
+    /**
+     * Prepares the [ViewModelState] when there is no result or some unexpected situation.
+     */
     protected abstract fun onIdle(initState: STATE): STATE
 }
 
-
-interface BaseEventHandlerManager<STATE : ViewModelState, PARAM : Param> {
+/**
+ * Hosts [EventHandler] objects and manages the overall process of event handling.
+ */
+interface BaseCompositeEventHandler<STATE : ViewModelState, PARAM : Param> {
     fun handleEvent(event: Any, liveData: MutableLiveData<STATE>, param: PARAM, initState: STATE)
     fun addHandler(handler: BaseEventHandler<STATE, PARAM>)
 }
 
-abstract class EventHandlerManager<STATE : ViewModelState, PARAM : Param> :
-        BaseEventHandlerManager<STATE, PARAM> {
+abstract class CompositeEventHandler<STATE : ViewModelState, PARAM : Param> :
+        BaseCompositeEventHandler<STATE, PARAM> {
 
     private val handlers: MutableList<BaseEventHandler<STATE, PARAM>> = mutableListOf()
     override fun addHandler(handler: BaseEventHandler<STATE, PARAM>) {

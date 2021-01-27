@@ -2,21 +2,22 @@ package com.sevenpeakssoftware.amirnaghavi.presentation.event_handler
 
 import com.sevenpeakssoftware.amirnaghavi.base.*
 import com.sevenpeakssoftware.amirnaghavi.domain.entity.CarEntity
-import com.sevenpeakssoftware.amirnaghavi.presentation.CarEvent
-import com.sevenpeakssoftware.amirnaghavi.presentation.CarEventContract
+import com.sevenpeakssoftware.amirnaghavi.presentation.GetCarInfoEvent
 import com.sevenpeakssoftware.amirnaghavi.presentation.CarState
+import com.sevenpeakssoftware.amirnaghavi.presentation.event_contract.EventContractID
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 
 class CarEventHandler(
         compositeDisposable: CompositeDisposable,
         private val useCase: ObservableUseCase<List<CarEntity>, CarsParam>
-) : EventHandler<CarEvent, CarState, CarsParam, List<CarEntity>>(compositeDisposable, CarEventContract()) {
+) : EventHandler<GetCarInfoEvent, CarState, CarsParam, List<CarEntity>>(compositeDisposable) {
 
-    override fun triggerAction(param: CarsParam, initState: CarState): Observable<Answer<List<CarEntity>>> =
-            useCase.execute(param, RepositoryStrategy.OfflineFirst).apply {
+    override val ID: String = EventContractID.CAR_EVENT
 
-            }
+    override fun triggerAction(param: CarsParam, initState: CarState): Observable<Answer<List<CarEntity>>> {
+        return useCase.execute(param, RepositoryStrategy.OfflineFirst)
+    }
 
     override fun onSuccess(answer: Answer<List<CarEntity>>, initState: CarState): CarState =
             initState.copy(

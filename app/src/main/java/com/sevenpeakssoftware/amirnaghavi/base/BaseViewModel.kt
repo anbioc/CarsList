@@ -6,31 +6,38 @@ import androidx.lifecycle.ViewModel
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.subjects.PublishSubject
 
+/**
+ * Base [ViewModel] class responsible to process UI event emissions using State pattern.
+ */
 abstract class BaseViewModel<STATE : ViewModelState, EVENT : ViewModelEvent, PARAM : Param> : ViewModel() {
 
     protected val compositeDisposable = CompositeDisposable()
-    protected abstract val eventHandlerManager: EventHandlerManager<STATE, PARAM>
+    protected abstract val eventHandlerManager: CompositeEventHandler<STATE, PARAM>
 
+    /**
+     * Initial state.
+     */
+    abstract val initState: STATE
+
+    /**
+     * The exit point of the process, each operation would be summed up at this point, resulting to a [ViewModelState]
+     */
     private val _stateLiveData: MutableLiveData<STATE> = MutableLiveData()
     val stateLiveData: LiveData<STATE> get() = _stateLiveData
 
     /**
-     * Notifies [EventHandler] about triggered events.
+     * The starting point of the operation, each [ViewModelEvent] would start it's journey from this point and
+     * [EventHandler]s would be notified for each event emission.
      */
     private val eventBridge: PublishSubject<Pair<EVENT, PARAM>> = PublishSubject.create()
 
     init {
+        /**
+         * Wires up [ViewModelEvent] emissions to the [CompositeEventHandler] as the event handler manager.
+         */
         eventBridge.map {
-            eventHandlerManager.handleEvent(it.first, _stateLiveData, it.second)
+            eventHandlerManager.handleEvent(it.first, _stateLiveData, it.second, initState)
         }.subscribe()
-    }
-
-
-    /**
-     * Call this method to add appropriate event handlers to the handlers list.
-     */
-    protected fun addHandler(handler: BaseEventHandler<STATE, PARAM>){
-        eventHandlerManager.addHandler(handler)
     }
 
     /**
@@ -49,16 +56,9 @@ abstract class ViewModelState {
     open var baseState: BaseState = BaseState()
 }
 
-interface EventContract {
+interface ViewModelEvent {
     val ID: String
 }
 
-interface BaseViewModelEvent {
-    val ID: String
-}
-
-abstract class ViewModelEvent(contact: EventContract) : BaseViewModelEvent {
-    override val ID: String = contact.ID
-}
 
 
