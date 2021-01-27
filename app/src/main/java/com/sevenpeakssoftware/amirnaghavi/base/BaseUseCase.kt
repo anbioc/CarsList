@@ -10,8 +10,7 @@ interface BaseUseCase<T, PARAM : Param> {
 abstract class ObservableUseCase<T, PARAM : Param>(
     private val scheduler: SchedulerProvider,
     private val errorContainer: ErrorContainer
-) :
-    BaseUseCase<Observable<Answer<T>>, PARAM> {
+) : BaseUseCase<Observable<Answer<T>>, PARAM> {
 
     protected abstract fun buildObservable(
         params: PARAM,
