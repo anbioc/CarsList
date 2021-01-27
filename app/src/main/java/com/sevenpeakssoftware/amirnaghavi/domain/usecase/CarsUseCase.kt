@@ -15,5 +15,4 @@ class CarsUseCase @Inject constructor(
         params: CarsParam,
         strategy: RepositoryStrategy
     ): Observable<Answer<List<CarEntity>>> = carsRepository.getResult(params, strategy)
-
 }

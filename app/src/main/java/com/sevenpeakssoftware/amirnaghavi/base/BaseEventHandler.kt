@@ -6,7 +6,7 @@ import io.reactivex.disposables.CompositeDisposable
 
 
 /**
- * Hosts the logic to handle incoming event either a network call or db transaction ot any other other logic.
+ * Hosts the logic to handle incoming event either a network call or db transaction or any other other logic.
  */
 interface BaseEventHandler<STATE : ViewModelState, PARAM : Param> {
     fun isResponsibleTo(event: Any): Boolean

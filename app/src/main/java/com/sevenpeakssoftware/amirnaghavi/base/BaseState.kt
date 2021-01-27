@@ -1,6 +1,5 @@
 package com.sevenpeakssoftware.amirnaghavi.base
 
-import com.sevenpeakssoftware.amirnaghavi.base.ErrorEntity
 
 
 data class BaseState(

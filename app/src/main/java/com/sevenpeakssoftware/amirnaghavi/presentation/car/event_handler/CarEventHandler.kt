@@ -1,10 +1,10 @@
-package com.sevenpeakssoftware.amirnaghavi.presentation.event_handler
+package com.sevenpeakssoftware.amirnaghavi.presentation.car.event_handler
 
 import com.sevenpeakssoftware.amirnaghavi.base.*
 import com.sevenpeakssoftware.amirnaghavi.domain.entity.CarEntity
-import com.sevenpeakssoftware.amirnaghavi.presentation.GetCarInfoEvent
-import com.sevenpeakssoftware.amirnaghavi.presentation.CarState
-import com.sevenpeakssoftware.amirnaghavi.presentation.event_contract.EventContractID
+import com.sevenpeakssoftware.amirnaghavi.presentation.car.GetCarInfoEvent
+import com.sevenpeakssoftware.amirnaghavi.presentation.car.CarState
+import com.sevenpeakssoftware.amirnaghavi.presentation.car.EventContractID
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 

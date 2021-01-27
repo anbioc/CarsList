@@ -1,9 +1,8 @@
-package com.sevenpeakssoftware.amirnaghavi.presentation
+package com.sevenpeakssoftware.amirnaghavi.presentation.car
 
 import com.sevenpeakssoftware.amirnaghavi.base.*
 import com.sevenpeakssoftware.amirnaghavi.domain.entity.CarEntity
-import com.sevenpeakssoftware.amirnaghavi.presentation.event_contract.EventContractID
-import com.sevenpeakssoftware.amirnaghavi.presentation.event_handler.CarEventHandler
+import com.sevenpeakssoftware.amirnaghavi.presentation.car.event_handler.CarEventHandler
 import javax.inject.Inject
 
 class CarsViewModel @Inject constructor(
@@ -19,8 +18,8 @@ class CarsViewModel @Inject constructor(
 }
 
 data class CarState(
-        var data: Data = CarState.Data.Idle,
-        override var baseState: BaseState = BaseState()
+    var data: Data = Data.Idle,
+    override var baseState: BaseState = BaseState()
 ) : ViewModelState() {
     sealed class Data {
         data class Cars(val car: List<CarEntity>) : Data()

@@ -5,7 +5,10 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LifecycleRegistry
 import androidx.lifecycle.Observer
 
-class HistoryObserver<T>() : Observer<T>, LifecycleOwner {
+/**
+ * Tracks and saves emitted data from [LiveData] to further analysis.
+ */
+class HistoryObserver<T> : Observer<T>, LifecycleOwner {
     private val lifecycle = LifecycleRegistry(this)
     private val history: MutableList<T> = mutableListOf()
 

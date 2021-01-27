@@ -6,6 +6,9 @@ import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.given
 import com.sevenpeakssoftware.amirnaghavi.base.*
 import com.sevenpeakssoftware.amirnaghavi.domain.entity.CarEntity
+import com.sevenpeakssoftware.amirnaghavi.presentation.car.CarState
+import com.sevenpeakssoftware.amirnaghavi.presentation.car.CarsViewModel
+import com.sevenpeakssoftware.amirnaghavi.presentation.car.GetCarInfoEvent
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Assert.assertTrue
 import org.junit.Before
