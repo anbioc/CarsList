@@ -8,8 +8,8 @@ interface BaseRepository<T, PARAM: Param> {
 
 abstract class ObservableRepository<T, PARAM: Param> : BaseRepository<Observable<Answer<T>>,PARAM> {
 
-    abstract fun getOffline(param: PARAM): Observable<Answer<T>>
-    abstract fun getRemote(param: PARAM): Observable<Answer<T>>
+    protected abstract fun getOffline(param: PARAM): Observable<Answer<T>>
+    protected abstract fun getRemote(param: PARAM): Observable<Answer<T>>
 
     private fun getOfflineFirst(param: PARAM) =
         Observable.concatArrayEagerDelayError(
