@@ -24,6 +24,21 @@ sealed class Answer<T> {
         }
     }
 
+    fun extractError() = with(this){
+        if (!isFailure())
+            ErrorEntity.NoError
+        else {
+            (this as Failure<T>).error
+        }
+    }
+
+    fun extractData(): T = with(this) {
+        if (!isSuccess())
+            throw IllegalArgumentException("data not found")
+
+        (this as Success<T>).data
+    }
+
 }
 
 fun<T> List<T>.toSuccessAnswer() = Answer.Success(this)
