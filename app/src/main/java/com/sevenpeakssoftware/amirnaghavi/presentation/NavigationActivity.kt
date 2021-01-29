@@ -6,7 +6,7 @@ import android.view.WindowManager
 import dagger.android.support.DaggerAppCompatActivity
 
 class NavigationActivity : DaggerAppCompatActivity() {
-    
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         makeFullScreen()
