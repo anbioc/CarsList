@@ -51,6 +51,8 @@ dependencies {
     /** Kotlin*/
     implementation "org.jetbrains.kotlin:kotlin-stdlib:${versions.kotlin}"
     implementation "androidx.core:core-ktx:${versions.corektx}"
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.2'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.3.2'
 
     /** Junit*/
     testImplementation "junit:junit:${versions.junit}"
@@ -127,4 +129,8 @@ dependencies {
     implementation "com.twistedequations.rx2:rx2-android-schedulers:${versions.rx2AandroidSchedulers}"
     implementation "com.squareup.retrofit2:converter-gson:${versions.converterGson}"
     implementation "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:${versions.retrofit2Rxjava2Adapter}"
+
+    /** NavHost */
+    implementation "androidx.navigation:navigation-fragment-ktx:${versions.navhost}"
+    implementation "androidx.navigation:navigation-ui-ktx:${versions.navhost}"
 }

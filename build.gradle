@@ -35,7 +35,8 @@ buildscript {
             "assertjAndroidVersion"  : "1.1.1",
             "mockitoinline"          : "3.2.4",
             "mockitokotlin"          : "2.2.0",
-            "coretesting"            : "2.1.0"
+            "coretesting"            : "2.1.0",
+            "navhost"                : "2.3.3"
 
 
     ]
