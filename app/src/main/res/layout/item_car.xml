@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:id="@+id/root_view"
+    android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/item_car_title_tv"
@@ -49,6 +50,8 @@
         android:maxLines="2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="@dimen/margin_small"
         app:layout_constraintTop_toBottomOf="@id/item_car_date_tv"
         tools:text="29 November 2017, 12:12" />
 

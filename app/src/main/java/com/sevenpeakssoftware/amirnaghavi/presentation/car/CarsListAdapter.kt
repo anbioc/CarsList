@@ -3,6 +3,7 @@ package com.sevenpeakssoftware.amirnaghavi.presentation.car
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.sevenpeakssoftware.amirnaghavi.databinding.ItemCarBinding
 import com.sevenpeakssoftware.amirnaghavi.domain.entity.CarEntity
 
@@ -22,7 +23,7 @@ class CarsListAdapter : RecyclerView.Adapter<CarItemViewHolder>() {
 
 }
 
-class CarItemViewHolder(binding: ItemCarBinding) : RecyclerView.ViewHolder(binding.root) {
+class CarItemViewHolder(private val binding: ItemCarBinding) : RecyclerView.ViewHolder(binding.root) {
 
     companion object {
         fun create(
@@ -33,6 +34,9 @@ class CarItemViewHolder(binding: ItemCarBinding) : RecyclerView.ViewHolder(bindi
     }
 
     fun bind(car: CarEntity) {
-
+        Glide.with(binding.root.context).load(car.image).into(binding.itemCarImage)
+        binding.itemCarTitleTv.text = car.title
+        binding.itemCarDescriptionTv.text = car.ingress
+        binding.itemCarDateTv.text = car.dateTime
     }
 }
