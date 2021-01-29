@@ -22,7 +22,7 @@ data class CarState(
     override var baseState: BaseState = BaseState()
 ) : ViewModelState() {
     sealed class Data {
-        data class Cars(val car: List<CarEntity>) : Data()
+        data class Cars(val cars: List<CarEntity>) : Data()
         object Idle : Data()
         object NoData : Data()
     }
