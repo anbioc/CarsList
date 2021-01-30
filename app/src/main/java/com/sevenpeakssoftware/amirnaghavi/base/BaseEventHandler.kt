@@ -80,6 +80,9 @@ interface BaseCompositeEventHandler<STATE : ViewModelState, PARAM : Param> {
     fun addHandler(handler: BaseEventHandler<STATE, PARAM>)
 }
 
+/**
+ * Holds event handlers list and decide which one is responsible to handle current event.
+ */
 abstract class CompositeEventHandler<STATE : ViewModelState, PARAM : Param> :
     BaseCompositeEventHandler<STATE, PARAM> {
 

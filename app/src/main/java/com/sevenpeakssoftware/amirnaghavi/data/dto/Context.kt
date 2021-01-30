@@ -5,9 +5,9 @@ import com.google.gson.annotations.SerializedName
 
 data class Context(
     @SerializedName("type")
-    val type: String,
+    val type: String = "",
     @SerializedName("subject")
-    val subject: String,
+    val subject: String = "",
     @SerializedName("description")
-    val description: String
+    val description: String = ""
 )

@@ -1,7 +1,6 @@
 package com.sevenpeakssoftware.amirnaghavi.presentation.car
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +9,6 @@ import com.sevenpeakssoftware.amirnaghavi.base.BaseFragment
 import com.sevenpeakssoftware.amirnaghavi.base.CarsParam
 import com.sevenpeakssoftware.amirnaghavi.base.ErrorEntity
 import com.sevenpeakssoftware.amirnaghavi.databinding.FragmentCarBinding
-import com.sevenpeakssoftware.amirnaghavi.databinding.IncludeCarListBinding
 import com.sevenpeakssoftware.amirnaghavi.domain.entity.CarEntity
 import com.sevenpeakssoftware.amirnaghavi.extension.observeLiveData
 import com.sevenpeakssoftware.amirnaghavi.extension.show
@@ -81,20 +79,17 @@ class CarFragment : BaseFragment() {
     }
 
     private fun handleData(cars: List<CarEntity>) {
-        Log.d("dataTag", "handleData: called ${cars.size}")
         binding.noDataContainer.noDataContainer.show(false)
         binding.carListContainer.show(true)
         carListAdapter.itemList = cars
     }
 
     private fun handleNoData() {
-        Log.d("dataTag", "handleNoData: called")
         binding.noDataContainer.root.show(true)
         binding.carListContainer.show(false)
     }
 
     private fun handleError(error: ErrorEntity) {
-        Log.d("errorTag", "handleError:  $error")
         binding.noDataContainer.root.show(true)
         binding.carListContainer.show(false)
     }

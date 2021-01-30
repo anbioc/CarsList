@@ -23,7 +23,7 @@ class CarEventHandler(
         param: CarsParam,
         initState: CarState
     ): Observable<Answer<List<CarEntity>>> {
-        return useCase.execute(param, RepositoryStrategy.Remote)
+        return useCase.execute(param, RepositoryStrategy.OfflineFirst)
     }
 
     override fun onSuccess(answer: Answer<List<CarEntity>>, initState: CarState): CarState =

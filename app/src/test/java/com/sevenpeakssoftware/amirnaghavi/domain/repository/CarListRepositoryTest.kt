@@ -1,6 +1,8 @@
 package com.sevenpeakssoftware.amirnaghavi.domain.repository
 
+import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.given
+import com.nhaarman.mockitokotlin2.verify
 import com.sevenpeakssoftware.amirnaghavi.base.*
 import com.sevenpeakssoftware.amirnaghavi.data.local.data_source.CarsLocalDataSource
 import com.sevenpeakssoftware.amirnaghavi.data.remote.RemoteCarsDataSource
@@ -37,11 +39,12 @@ class CarListRepositoryTest {
 
 
     @Test
-    fun `givenOfflineFirstStrategy and givenLocalDataIsAvailable and givenRemoteDataIsAvailable whenOnGetResult thenResultIsAvailable`() {
+    fun `givenOfflineFirstStrategy and givenLocalDataIsAvailable and givenRemoteDataIsAvailable whenOnGetResult thenResultIsAvailable thenLocalDataSourceCallSaveData`() {
         givenLocalDataIsAvailable()
         givenRemoteDataIsAvailable()
         whenOnGetResult()
         thenResultIsAvailable()
+        thenLocalDataSourceCallWrite()
     }
 
 
@@ -82,4 +85,9 @@ class CarListRepositoryTest {
             listOf(mockCarEntity).toSuccessAnswer(),
             listOf(mockCarEntity).toSuccessAnswer()
         )
+
+    private fun thenLocalDataSourceCallWrite() {
+        verify(mockLocalDataSource).write(any())
+    }
+
 }

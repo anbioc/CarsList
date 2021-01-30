@@ -2,6 +2,7 @@ package com.sevenpeakssoftware.amirnaghavi.data.remote
 
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.given
+import com.nhaarman.mockitokotlin2.verify
 import com.sevenpeakssoftware.amirnaghavi.base.Answer
 import com.sevenpeakssoftware.amirnaghavi.base.CarsParam
 import com.sevenpeakssoftware.amirnaghavi.base.Mapper
@@ -43,7 +44,6 @@ class RemoteCarsDataSourceTest {
         whenOnRead()
         thenResultIsAvailable()
     }
-
 
     /*
     given
