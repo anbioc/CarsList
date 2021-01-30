@@ -10,12 +10,12 @@ import com.sevenpeakssoftware.amirnaghavi.data.local.type_converter.CarContentTy
 import com.sevenpeakssoftware.amirnaghavi.data.local.type_converter.TagsConverter
 
 @Database(
-        entities =[(CarItemLocalEntity::class)],
+        entities = [(CarItemLocalEntity::class)],
         version = 1,
         exportSchema = false
 )
 @TypeConverters(CarContentTypeConverter::class, TagsConverter::class)
-abstract class CarsDataBase: RoomDatabase() {
+abstract class CarsDataBase : RoomDatabase() {
     companion object {
         fun create(context: Context): CarsDataBase =
                 Room.databaseBuilder(
@@ -29,4 +29,6 @@ abstract class CarsDataBase: RoomDatabase() {
                         .allowMainThreadQueries()
                         .build()
     }
+
+    abstract fun provideCarDao(): CarDao
 }
