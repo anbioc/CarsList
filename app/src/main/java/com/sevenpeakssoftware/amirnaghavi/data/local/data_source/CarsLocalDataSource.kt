@@ -14,7 +14,11 @@ class CarsLocalDataSource @Inject constructor(
 ): ObservableReadableAndWriteable<List<CarEntity>, CarsParam>(){
 
     override fun read(param: CarsParam): Observable<Answer<List<CarEntity>>> = dao.getCars().map {
-        mapper.mapRightToLeft(it).toSuccessAnswer()
+        if(it.isEmpty()){
+            Answer.Failure(ErrorEntity.NotFound)
+        }else {
+            mapper.mapRightToLeft(it).toSuccessAnswer()
+        }
     }
 
     override fun write(input: List<CarEntity>) =dao.insertCars(

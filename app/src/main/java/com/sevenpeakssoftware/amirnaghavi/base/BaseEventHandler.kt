@@ -33,7 +33,7 @@ abstract class EventHandler<EVENT : ViewModelEvent, STATE : ViewModelState, PARA
      * Wraps all necessary steps to handle the input event.
      */
     override fun handleEvent(param: PARAM, liveData: MutableLiveData<STATE>, initState: STATE) {
-        onIdle(initState)
+        liveData.postValue(onIdle(initState))
         compositeDisposable.add(
             triggerAction(param, initState)
                 .subscribeOn(schedulerProvider.ioScheduler)
