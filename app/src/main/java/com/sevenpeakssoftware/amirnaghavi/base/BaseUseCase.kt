@@ -20,6 +20,9 @@ abstract class ObservableUseCase<T, PARAM : Param>(
         strategy: RepositoryStrategy
     ): Observable<Answer<T>>
 
+    /**
+     * Call this to trigger the use-case operation
+     */
     override fun execute(param: PARAM, strategy: RepositoryStrategy): Observable<Answer<T>> =
         buildObservable(param, strategy)
             .onErrorReturn {

@@ -17,6 +17,9 @@ abstract class ObservableRepository<T, PARAM : Param> :
             triggerOfflineCall(param), triggerRemoteCall(param)
         )
 
+    /**
+     * Decides the flow of data source calls based on given [RepositoryStrategy]
+     */
     override fun getResult(param: PARAM, strategy: RepositoryStrategy): Observable<Answer<T>> =
         when (strategy) {
             RepositoryStrategy.OfflineFirst -> getOfflineFirst(param)

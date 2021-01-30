@@ -22,11 +22,6 @@ abstract class CarsDataBase : RoomDatabase() {
                 CarsDataBase::class.java,
                 "cars.db"
             ).allowMainThreadQueries().build()
-
-        fun getTestInstance(context: Context) =
-            Room.inMemoryDatabaseBuilder(context, CarsDataBase::class.java)
-                .allowMainThreadQueries()
-                .build()
     }
 
     abstract fun provideCarDao(): CarDao

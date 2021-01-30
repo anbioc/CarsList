@@ -24,7 +24,7 @@ class NetworkModule {
 
     @Singleton
     @Provides
-    fun provideHttpClient(context: Context): OkHttpClient =
+    fun provideHttpClient(): OkHttpClient =
             OkHttpClient.Builder()
                     .cache(null)
                     .readTimeout(10, TimeUnit.SECONDS)

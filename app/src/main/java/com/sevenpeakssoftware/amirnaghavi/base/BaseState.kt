@@ -1,7 +1,9 @@
 package com.sevenpeakssoftware.amirnaghavi.base
 
 
-
+/**
+ * Base UI state.
+ */
 data class BaseState(
         var error: ErrorEntity = ErrorEntity.NoError,
         var loading: Boolean = true,

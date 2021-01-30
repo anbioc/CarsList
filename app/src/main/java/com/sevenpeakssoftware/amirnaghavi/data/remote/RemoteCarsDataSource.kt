@@ -1,6 +1,5 @@
 package com.sevenpeakssoftware.amirnaghavi.data.remote
 
-import android.util.Log
 import com.sevenpeakssoftware.amirnaghavi.base.*
 import com.sevenpeakssoftware.amirnaghavi.data.CarsAPI
 import com.sevenpeakssoftware.amirnaghavi.data.dto.CarDTO
@@ -14,7 +13,6 @@ class RemoteCarsDataSource @Inject constructor(
 ) : ObservableReadable<List<CarEntity>, CarsParam>() {
     override fun read(param: CarsParam): Observable<Answer<List<CarEntity>>> =
         api.getCarData().map {
-            Log.d("dataTag", "read: got data ${it.content}")
         mapper.map(it).toSuccessAnswer()
     }
 

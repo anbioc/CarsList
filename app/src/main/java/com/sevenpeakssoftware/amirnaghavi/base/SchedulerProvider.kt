@@ -12,12 +12,10 @@ interface SchedulerProvider {
 
 }
 
-
 class AppSchedulerProvider @Inject constructor(
         androidRxSchedulers: AndroidRxSchedulers
 ) : SchedulerProvider {
     override val ioScheduler: Scheduler = androidRxSchedulers.io()
     override val mainScheduler: Scheduler = androidRxSchedulers.mainThread()
     override val computation: Scheduler = androidRxSchedulers.computation()
-
 }
