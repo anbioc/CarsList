@@ -21,6 +21,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+
     buildTypes {
 
         debug {
@@ -41,6 +42,9 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {
@@ -48,6 +52,8 @@ dependencies {
     /** Kotlin*/
     implementation "org.jetbrains.kotlin:kotlin-stdlib:${versions.kotlin}"
     implementation "androidx.core:core-ktx:${versions.corektx}"
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.2'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.3.2'
 
     /** Junit*/
     testImplementation "junit:junit:${versions.junit}"
@@ -65,6 +71,8 @@ dependencies {
     /** Test rules*/
     androidTestImplementation "androidx.test:runner:${versions.testRunner}"
     androidTestImplementation "androidx.test:rules:${versions.testRules}"
+    testImplementation "androidx.arch.core:core-testing:2.1.0"
+
 
     /** Assertions */
     testImplementation "org.assertj:assertj-core:${versions.assertjVersion}"
@@ -122,4 +130,8 @@ dependencies {
     implementation "com.twistedequations.rx2:rx2-android-schedulers:${versions.rx2AandroidSchedulers}"
     implementation "com.squareup.retrofit2:converter-gson:${versions.converterGson}"
     implementation "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:${versions.retrofit2Rxjava2Adapter}"
+
+    /** NavHost */
+    implementation "androidx.navigation:navigation-fragment-ktx:${versions.navhost}"
+    implementation "androidx.navigation:navigation-ui-ktx:${versions.navhost}"
 }

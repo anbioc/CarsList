@@ -10,5 +10,4 @@ class TestScheduler : SchedulerProvider{
         get() = Schedulers.trampoline()
     override val computation: Scheduler
         get() = Schedulers.trampoline()
-
 }

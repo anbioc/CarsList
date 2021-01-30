@@ -12,6 +12,9 @@ abstract class ObservableUseCase<T, PARAM : Param>(
     private val errorContainer: ErrorContainer
 ) : BaseUseCase<Observable<Answer<T>>, PARAM> {
 
+    /**
+     * Hosts the main logic of the use-case, return result wrapped around [Observable] object.
+     */
     protected abstract fun buildObservable(
         params: PARAM,
         strategy: RepositoryStrategy

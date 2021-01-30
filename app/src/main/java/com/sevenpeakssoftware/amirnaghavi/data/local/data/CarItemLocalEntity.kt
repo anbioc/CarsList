@@ -1,23 +1,19 @@
 package com.sevenpeakssoftware.amirnaghavi.data.local.data
 
 import androidx.room.Entity
-import androidx.room.PrimaryKey
-import com.sevenpeakssoftware.amirnaghavi.base.BaseEntity
-import com.sevenpeakssoftware.amirnaghavi.data.dto.ContentDTO
+import com.sevenpeakssoftware.amirnaghavi.AppConstant
 
-@Entity(tableName = "cars")
+@Entity(tableName = AppConstant.CARS_TABLE_NAME, primaryKeys = ["id"])
 data class CarItemLocalEntity(
         val changed: Int,
         val content: List<LocalCarContent>,
         val created: Int,
         val dateTime: String,
-        @PrimaryKey
         val id: Int,
         val image: String,
         val ingress: String,
-        val tags: List<String>,
         val title: String
-): BaseEntity
+)
 
 data class LocalCarContent(
         val description: String,

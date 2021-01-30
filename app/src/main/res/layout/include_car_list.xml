@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:background="@color/black"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <TextView
+        android:id="@+id/car_list_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_intermediate"
+        android:layout_marginTop="@dimen/margin_x_large"
+        android:maxLines="2"
+        android:textColor="@color/white"
+        android:text="@string/cars" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/car_list"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/car_list_title"
+        tools:listitem="@layout/item_car"
+        android:layout_width="match_parent"
+        android:layout_height="0dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

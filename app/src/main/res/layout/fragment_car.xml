@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black">
+
+    <ProgressBar
+        android:id="@+id/car_loader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <include
+        android:id="@+id/no_data_container"
+        layout="@layout/include_no_data" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/car_list_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/car_list_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_intermediate"
+            android:layout_marginTop="@dimen/margin_x_large"
+            android:maxLines="2"
+            style="@style/tv_style_header_text"
+            android:text="@string/cars"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/car_list"
+            android:layout_marginTop="@dimen/margin_intermediate"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/car_list_title"
+            tools:listitem="@layout/item_car" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
