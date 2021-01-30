@@ -6,8 +6,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.sevenpeakssoftware.amirnaghavi.databinding.ItemCarBinding
 import com.sevenpeakssoftware.amirnaghavi.domain.entity.CarEntity
+import com.sevenpeakssoftware.amirnaghavi.util.CarsDateTimeHelper
 
-class CarsListAdapter : RecyclerView.Adapter<CarItemViewHolder>() {
+class CarsListAdapter(private val dateTimeHelper: CarsDateTimeHelper) :
+    RecyclerView.Adapter<CarItemViewHolder>() {
 
     var itemList: List<CarEntity> = emptyList()
         set(value) {
@@ -15,21 +17,28 @@ class CarsListAdapter : RecyclerView.Adapter<CarItemViewHolder>() {
             notifyDataSetChanged()
         }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CarItemViewHolder = CarItemViewHolder.create(parent)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CarItemViewHolder =
+        CarItemViewHolder.create(parent, dateTimeHelper)
 
-    override fun onBindViewHolder(holder: CarItemViewHolder, position: Int) = holder.bind(itemList[position])
+    override fun onBindViewHolder(holder: CarItemViewHolder, position: Int) =
+        holder.bind(itemList[position])
 
     override fun getItemCount(): Int = itemList.size
 
 }
 
-class CarItemViewHolder(private val binding: ItemCarBinding) : RecyclerView.ViewHolder(binding.root) {
+class CarItemViewHolder(
+    private val binding: ItemCarBinding,
+    private val dateTimeHelper: CarsDateTimeHelper
+) : RecyclerView.ViewHolder(binding.root) {
 
     companion object {
         fun create(
-            parent: ViewGroup
+            parent: ViewGroup,
+            dateTimeHelper: CarsDateTimeHelper
         ): CarItemViewHolder = CarItemViewHolder(
-            ItemCarBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemCarBinding.inflate(LayoutInflater.from(parent.context), parent, false),
+            dateTimeHelper
         )
     }
 
