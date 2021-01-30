@@ -40,7 +40,7 @@ class CarEventHandler(
 
     override fun onIdle(initState: CarState): CarState =
         initState.copy(
-            data = CarState.Data.NoData,
+            data = CarState.Data.Idle,
             baseState = initState.baseState.loading()
         )
 

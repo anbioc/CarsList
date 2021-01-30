@@ -6,6 +6,10 @@
     android:layout_height="match_parent"
     android:background="@color/black">
 
+    <include
+        android:id="@+id/no_data_container"
+        layout="@layout/include_no_data" />
+
     <ProgressBar
         android:id="@+id/car_loader"
         android:layout_width="wrap_content"
@@ -16,9 +20,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <include
-        android:id="@+id/no_data_container"
-        layout="@layout/include_no_data" />
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/car_list_container"
