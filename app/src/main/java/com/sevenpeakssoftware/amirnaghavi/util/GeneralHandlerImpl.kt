@@ -10,7 +10,7 @@ import javax.inject.Inject
 
 class GeneralHandlerImpl @Inject constructor() : ErrorContainer {
     override fun getError(throwable: Throwable): ErrorEntity {
-        Log.d(this.javaClass.canonicalName, "error: ${throwable.toString()}")
+        Log.d(this.javaClass.canonicalName, "error: $throwable")
         throwable.printStackTrace()
         return when (throwable) {
             is IOException -> ErrorEntity.Network

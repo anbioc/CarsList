@@ -21,7 +21,6 @@ class DomainToLocalMapper @Inject constructor() :
                         id = it.id,
                         image = it.image,
                         ingress = it.ingress,
-                        tags = it.tags,
                         title = it.title
                     )
                 )
@@ -53,7 +52,6 @@ class DomainToLocalMapper @Inject constructor() :
                         id = it.id,
                         image = it.image,
                         ingress = it.ingress,
-                        tags = it.tags,
                         title = it.title
                     )
                 )

@@ -33,7 +33,7 @@ abstract class BaseViewModel<STATE : ViewModelState, EVENT : ViewModelEvent, PAR
 
     init {
         /**
-         * Wires up [ViewModelEvent] emissions to the [CompositeEventHandler] as the event handler manager.
+         * Wires up view model event emissions to the composite event handler as the event handler manager.
          */
         eventBridge.map {
             eventHandlerManager.handleEvent(it.first, _stateLiveData, it.second, initState)

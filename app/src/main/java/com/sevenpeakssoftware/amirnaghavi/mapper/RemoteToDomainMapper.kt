@@ -19,7 +19,6 @@ class RemoteToDomainMapper @Inject constructor(): Mapper<CarsDTO, List<CarEntity
                     id = it.id,
                     image = it.image,
                     ingress = it.ingress,
-                    tags = it.tags,
                     title = it.title
                 )
             )

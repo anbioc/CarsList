@@ -7,7 +7,6 @@ import com.sevenpeakssoftware.amirnaghavi.data.local.data.CarItemLocalEntity
 import com.sevenpeakssoftware.amirnaghavi.domain.entity.CarEntity
 import com.sevenpeakssoftware.amirnaghavi.mapper.DomainToLocalMapper
 import com.sevenpeakssoftware.amirnaghavi.mapper.RemoteToDomainMapper
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 

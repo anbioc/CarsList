@@ -9,7 +9,6 @@ import com.sevenpeakssoftware.amirnaghavi.data.local.data.CarItemLocalEntity
 import com.sevenpeakssoftware.amirnaghavi.data.local.data_source.CarsLocalDataSource
 import com.sevenpeakssoftware.amirnaghavi.data.remote.RemoteCarsDataSource
 import com.sevenpeakssoftware.amirnaghavi.domain.entity.CarEntity
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 

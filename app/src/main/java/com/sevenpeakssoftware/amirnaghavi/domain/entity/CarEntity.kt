@@ -11,7 +11,6 @@ data class CarEntity(
     val id: Int,
     val image: String,
     val ingress: String,
-    val tags: List<String>,
     val title: String
 ):BaseEntity
 

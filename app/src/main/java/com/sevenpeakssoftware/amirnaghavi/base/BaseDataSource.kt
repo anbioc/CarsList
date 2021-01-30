@@ -9,7 +9,6 @@ interface Readable<T, PARAM: Param>: BaseDataSource {
 }
 
 interface Writeable<T>: BaseDataSource {
-    fun write(t: T): Comparable<Boolean>
 }
 
 interface ReadableAndWriteable<T, R, PARAM: Param>: BaseDataSource{
@@ -18,8 +17,6 @@ interface ReadableAndWriteable<T, R, PARAM: Param>: BaseDataSource{
 }
 
 abstract class ObservableReadable<T, PARAM: Param>: Readable<Observable<Answer<T>>, PARAM>
-
-abstract class ObservableWriteable<T>: Writeable<T>
 
 abstract class ObservableReadableAndWriteable<T, PARAM: Param>: ReadableAndWriteable<Observable<Answer<T>>, T, PARAM>
 

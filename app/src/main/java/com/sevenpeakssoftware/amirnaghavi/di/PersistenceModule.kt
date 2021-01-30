@@ -13,6 +13,6 @@ class PersistenceModule {
     fun provideDataBase(context: Context): CarsDataBase = CarsDataBase.create(context)
 
     @Provides
-    fun provideCarDao(carsDataBase: CarsDataBase):CarDao =carsDataBase.provideCarDao()
+    fun provideCarDao(carsDataBase: CarsDataBase):CarDao = carsDataBase.provideCarDao()
 
 }

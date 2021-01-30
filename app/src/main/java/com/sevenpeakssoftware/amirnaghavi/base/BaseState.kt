@@ -7,10 +7,6 @@ data class BaseState(
         var loading: Boolean = true,
 ) {
 
-    fun noError() = this.copy(
-            error = ErrorEntity.NoError,
-    )
-
     fun noErrorNoLoading() = this.copy(
             error = ErrorEntity.NoError,
             loading = false,

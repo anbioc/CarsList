@@ -12,19 +12,19 @@ import javax.inject.Singleton
 
 @Singleton
 @Component(
-        modules = [
-            AndroidInjectionModule::class,
-            AndroidModule::class,
-            MapperModule::class,
-            ViewModelFactoryModule::class,
-            DataSourceModule::class,
-            PersistenceModule::class,
-            NetworkModule::class,
-            RepositoryModule::class,
-            UseCaseModule::class,
-            NavigationActivityBinding::class,
-            CarFragmentBinding::class
-        ]
+    modules = [
+        AndroidInjectionModule::class,
+        AndroidModule::class,
+        MapperModule::class,
+        ViewModelFactoryModule::class,
+        DataSourceModule::class,
+        PersistenceModule::class,
+        NetworkModule::class,
+        RepositoryModule::class,
+        UseCaseModule::class,
+        NavigationActivityBinding::class,
+        CarFragmentBinding::class
+    ]
 )
 interface AppComponent : AndroidInjector<DaggerApplication> {
 
@@ -32,9 +32,9 @@ interface AppComponent : AndroidInjector<DaggerApplication> {
     interface Builder {
         @BindsInstance
         fun application(application: Application): Builder
-
         fun build(): AppComponent
     }
 
     override fun inject(instance: DaggerApplication)
+
 }

@@ -68,7 +68,7 @@ class CarFragment : BaseFragment() {
                     // do nothing
                 }
                 CarState.Data.NoData -> {
-                    handleNoData();
+                    handleNoData()
                 }
                 is CarState.Data.Cars -> {
                     handleData((state.data as CarState.Data.Cars).cars)

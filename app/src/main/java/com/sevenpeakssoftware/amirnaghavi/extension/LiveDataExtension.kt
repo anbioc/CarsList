@@ -8,7 +8,7 @@ import androidx.lifecycle.Observer
 inline fun <T> Fragment.observeLiveData(
     liveData: LiveData<T>, crossinline onChanged: (data: T) -> Unit
 ) {
-    liveData.observe(requireActivity(), Observer {
+    liveData.observe(requireActivity(), {
         onChanged(it)
     })
 }
