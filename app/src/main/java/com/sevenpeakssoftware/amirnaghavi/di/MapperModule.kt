@@ -6,14 +6,16 @@ import com.sevenpeakssoftware.amirnaghavi.data.dto.CarsDTO
 import com.sevenpeakssoftware.amirnaghavi.data.local.data.CarItemLocalEntity
 import com.sevenpeakssoftware.amirnaghavi.domain.entity.CarEntity
 import com.sevenpeakssoftware.amirnaghavi.mapper.DomainToLocalMapper
+import com.sevenpeakssoftware.amirnaghavi.mapper.RemoteToDomainMapper
 import dagger.Binds
 import dagger.Module
+import dagger.Provides
 
 @Module
-interface MapperModule {
-    @Binds
-    fun bindRemoteToDomainMapper(mapper: DomainToLocalMapper): Mapper<CarsDTO, List<CarEntity>>
+class MapperModule {
+    @Provides
+    fun bindRemoteToDomainMapper(): Mapper<CarsDTO, List<CarEntity>> = RemoteToDomainMapper()
 
-    @Binds
-    fun bindDomainToLocalMapper(mapper: DomainToLocalMapper): TwoWayMapper<List<CarEntity>, List<CarItemLocalEntity>>
+    @Provides
+    fun bindDomainToLocalMapper(): TwoWayMapper<List<CarEntity>, List<CarItemLocalEntity>> = DomainToLocalMapper()
 }

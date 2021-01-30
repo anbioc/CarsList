@@ -1,6 +1,8 @@
 package com.sevenpeakssoftware.amirnaghavi.di
 
 import android.app.Application
+import com.sevenpeakssoftware.amirnaghavi.presentation.CarFragmentBinding
+import com.sevenpeakssoftware.amirnaghavi.presentation.NavigationActivityBinding
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
@@ -12,10 +14,16 @@ import javax.inject.Singleton
 @Component(
         modules = [
             AndroidInjectionModule::class,
+            AndroidModule::class,
             MapperModule::class,
+            ViewModelFactoryModule::class,
             DataSourceModule::class,
             PersistenceModule::class,
-            NetworkModule::class
+            NetworkModule::class,
+            RepositoryModule::class,
+            UseCaseModule::class,
+            NavigationActivityBinding::class,
+            CarFragmentBinding::class
         ]
 )
 interface AppComponent : AndroidInjector<DaggerApplication> {
