@@ -20,8 +20,6 @@ class CarFragment : BaseFragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    @Inject
-    lateinit var dateTimeHelper: CarsDateTimeHelper
 
     private var _binding: FragmentCarBinding? = null
     private val binding: FragmentCarBinding get() = _binding!!
@@ -31,7 +29,7 @@ class CarFragment : BaseFragment() {
     }
 
     private val carListAdapter by lazy {
-        CarsListAdapter(dateTimeHelper)
+        CarsListAdapter()
     }
 
     override fun onCreateView(

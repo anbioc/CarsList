@@ -6,9 +6,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.sevenpeakssoftware.amirnaghavi.databinding.ItemCarBinding
 import com.sevenpeakssoftware.amirnaghavi.domain.entity.CarEntity
-import com.sevenpeakssoftware.amirnaghavi.util.CarsDateTimeHelper
 
-class CarsListAdapter(private val dateTimeHelper: CarsDateTimeHelper) :
+class CarsListAdapter() :
     RecyclerView.Adapter<CarItemViewHolder>() {
 
     var itemList: List<CarEntity> = emptyList()
@@ -18,7 +17,7 @@ class CarsListAdapter(private val dateTimeHelper: CarsDateTimeHelper) :
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CarItemViewHolder =
-        CarItemViewHolder.create(parent, dateTimeHelper)
+        CarItemViewHolder.create(parent)
 
     override fun onBindViewHolder(holder: CarItemViewHolder, position: Int) =
         holder.bind(itemList[position])
@@ -29,16 +28,13 @@ class CarsListAdapter(private val dateTimeHelper: CarsDateTimeHelper) :
 
 class CarItemViewHolder(
     private val binding: ItemCarBinding,
-    private val dateTimeHelper: CarsDateTimeHelper
 ) : RecyclerView.ViewHolder(binding.root) {
 
     companion object {
         fun create(
             parent: ViewGroup,
-            dateTimeHelper: CarsDateTimeHelper
         ): CarItemViewHolder = CarItemViewHolder(
-            ItemCarBinding.inflate(LayoutInflater.from(parent.context), parent, false),
-            dateTimeHelper
+            ItemCarBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
     }
 
