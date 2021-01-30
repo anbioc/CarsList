@@ -30,7 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_intermediate"
-            android:layout_marginTop="@dimen/margin_x_large"
+            android:layout_marginTop="@dimen/margin_intermediate"
             android:maxLines="2"
             style="@style/tv_style_header_text"
             android:text="@string/cars"
