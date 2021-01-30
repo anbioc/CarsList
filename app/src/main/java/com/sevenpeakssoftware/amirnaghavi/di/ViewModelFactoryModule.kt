@@ -14,7 +14,7 @@ abstract class ViewModelFactoryModule {
     @Binds
     @IntoMap
     @ViewModelKey(CarsViewModel::class)
-    abstract fun bindViewModel(viewModel: CarsViewModel): ViewModel
+    abstract fun bindCarViewModel(viewModel: CarsViewModel): ViewModel
 
     @Binds
     abstract fun bindViewModelFactory(factory: AppViewModelFactory): ViewModelProvider.Factory

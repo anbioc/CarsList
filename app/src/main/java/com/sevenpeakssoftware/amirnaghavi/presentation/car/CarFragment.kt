@@ -12,7 +12,6 @@ import com.sevenpeakssoftware.amirnaghavi.databinding.FragmentCarBinding
 import com.sevenpeakssoftware.amirnaghavi.domain.entity.CarEntity
 import com.sevenpeakssoftware.amirnaghavi.extension.observeLiveData
 import com.sevenpeakssoftware.amirnaghavi.extension.show
-import com.sevenpeakssoftware.amirnaghavi.util.CarsDateTimeHelper
 import javax.inject.Inject
 
 class CarFragment : BaseFragment() {

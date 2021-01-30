@@ -6,10 +6,12 @@ import io.reactivex.disposables.CompositeDisposable
 
 
 /**
- * Hosts the logic to handle incoming event either a network call or db transaction or any other other logic.
+ * Hosts the logic to handle incoming events, could be any type of request to domain layer.
  */
 interface BaseEventHandler<STATE : ViewModelState, PARAM : Param> {
+
     fun isResponsibleTo(event: Any): Boolean
+
     fun handleEvent(param: PARAM, liveData: MutableLiveData<STATE>, initState: STATE)
     val ID: String
 }
@@ -25,19 +27,17 @@ abstract class EventHandler<EVENT : ViewModelEvent, STATE : ViewModelState, PARA
     abstract fun triggerAction(param: PARAM, initState: STATE): Observable<Answer<RESULT>>
 
     /**
-     * Checks weather current [EventHandler] is responsible to handle this event [ViewModelEvent] or not.
+     * Checks weather current [EventHandler] is responsible to handle this [ViewModelEvent] or not.
      */
     override fun isResponsibleTo(event: Any): Boolean = (ID == (event as ViewModelEvent).ID)
 
     /**
-     * Wraps all necessary steps to handle the input event.
+     * Wraps all necessary steps to handle the input event, reduces the domain [Answer] to the final UI state.
      */
     override fun handleEvent(param: PARAM, liveData: MutableLiveData<STATE>, initState: STATE) {
         liveData.postValue(onIdle(initState))
         compositeDisposable.add(
             triggerAction(param, initState)
-                .subscribeOn(schedulerProvider.ioScheduler)
-                .observeOn(schedulerProvider.mainScheduler)
                 .subscribe({
                     when {
                         it.isSuccess() -> {
@@ -73,7 +73,7 @@ abstract class EventHandler<EVENT : ViewModelEvent, STATE : ViewModelState, PARA
 }
 
 /**
- * Hosts [EventHandler] objects and manages the overall process of event handling.
+ * Contains a list of [EventHandler] objects and manages the overall process of event handling.
  */
 interface BaseCompositeEventHandler<STATE : ViewModelState, PARAM : Param> {
     fun handleEvent(event: Any, liveData: MutableLiveData<STATE>, param: PARAM, initState: STATE)
