@@ -5,9 +5,13 @@ import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
 @Module
-interface NavigationActivityBinding{
+interface NavigationActivityBinding {
+    @ContributesAndroidInjector
+    fun bindsNavigationActivity(): NavigationActivity
 }
 
 @Module
-interface CarFragmentBinding{
+interface CarFragmentBinding {
+    @ContributesAndroidInjector
+    fun bindsCarsFragment(): CarFragment
 }

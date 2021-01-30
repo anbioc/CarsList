@@ -3,20 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    tools:background="@color/black"
     android:id="@+id/root_view"
     android:layout_height="wrap_content">
-
-    <TextView
-        android:id="@+id/item_car_title_tv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_intermediate"
-        android:layout_marginEnd="@dimen/margin_x_large"
-        android:maxLines="2"
-        app:layout_constraintBottom_toBottomOf="@id/item_car_image"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:text="Q5 - Created for almost any landscape" />
 
     <ImageView
         android:id="@+id/item_car_image"
@@ -29,12 +18,26 @@
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
     <TextView
+        style="@style/tv_style_normal_text"
+        android:id="@+id/item_car_title_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_intermediate"
+        android:layout_marginEnd="@dimen/margin_x_large"
+        android:maxLines="2"
+        app:layout_constraintBottom_toBottomOf="@id/item_car_image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="Q5 - Created for almost any landscape" />
+
+    <TextView
         android:id="@+id/item_car_date_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_intermediate"
         android:layout_marginEnd="@dimen/margin_x_large"
         android:maxLines="2"
+        style="@style/tv_style_normal_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/item_car_image"
@@ -48,6 +51,7 @@
         android:layout_marginStart="@dimen/margin_intermediate"
         android:layout_marginEnd="@dimen/margin_x_large"
         android:maxLines="2"
+        style="@style/tv_style_normal_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"

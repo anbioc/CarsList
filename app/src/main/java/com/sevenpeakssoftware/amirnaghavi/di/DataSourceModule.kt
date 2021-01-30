@@ -3,7 +3,7 @@ package com.sevenpeakssoftware.amirnaghavi.di
 
 import com.sevenpeakssoftware.amirnaghavi.base.*
 import com.sevenpeakssoftware.amirnaghavi.data.CarsAPI
-import com.sevenpeakssoftware.amirnaghavi.data.dto.CarsDTO
+import com.sevenpeakssoftware.amirnaghavi.data.dto.CarDTO
 import com.sevenpeakssoftware.amirnaghavi.data.local.CarDao
 import com.sevenpeakssoftware.amirnaghavi.data.local.data.CarItemLocalEntity
 import com.sevenpeakssoftware.amirnaghavi.data.local.data_source.CarsLocalDataSource
@@ -17,7 +17,7 @@ class DataSourceModule {
 
     @Provides
     fun bindsCarRemoteDataSource(
-            api: CarsAPI, mapper: Mapper<CarsDTO, List<CarEntity>>
+            api: CarsAPI, mapper: Mapper<CarDTO, List<CarEntity>>
     ): ObservableReadable<List<CarEntity>, CarsParam> =
             RemoteCarsDataSource(api, mapper)
 

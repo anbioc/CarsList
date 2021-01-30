@@ -6,14 +6,15 @@ import com.sevenpeakssoftware.amirnaghavi.presentation.car.event_handler.CarEven
 import javax.inject.Inject
 
 class CarsViewModel @Inject constructor(
-        useCase: ObservableUseCase<List<CarEntity>, CarsParam>
+    schedulerProvider: SchedulerProvider,
+    useCase: ObservableUseCase<List<CarEntity>, CarsParam>
 ) : BaseViewModel<CarState, GetCarInfoEvent, CarsParam>() {
 
     override val eventHandlerManager: CompositeEventHandler<CarState, CarsParam> = CarEventHandlerManager()
     override val initState: CarState = CarState()
 
     init {
-        eventHandlerManager.addHandler(CarEventHandler(compositeDisposable, useCase))
+        eventHandlerManager.addHandler(CarEventHandler(compositeDisposable, useCase, schedulerProvider))
     }
 }
 

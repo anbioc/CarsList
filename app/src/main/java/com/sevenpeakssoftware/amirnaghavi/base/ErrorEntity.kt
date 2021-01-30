@@ -2,7 +2,7 @@ package com.sevenpeakssoftware.amirnaghavi.base
 
 
 
-sealed class ErrorEntity {
+sealed class ErrorEntity(val message: String = "") {
     object Network : ErrorEntity() {
         override fun toString(): String {
             return this.javaClass.canonicalName ?: ""
@@ -27,7 +27,7 @@ sealed class ErrorEntity {
         }
     }
 
-    data class Unknown(val message: String = "") : ErrorEntity() {
+    data class Unknown(val errorMessage: String = "") : ErrorEntity(errorMessage) {
         override fun toString(): String {
             return this.javaClass.canonicalName ?: ""
         }

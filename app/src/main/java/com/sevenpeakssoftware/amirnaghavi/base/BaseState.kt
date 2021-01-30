@@ -13,7 +13,7 @@ data class BaseState(
     )
 
     fun onErrorNoLoading(failure: ErrorEntity) = this.copy(
-            error  = ErrorEntity.NoError,
+            error  = ErrorEntity.Unknown(failure.message),
             loading = false,
     )
 
