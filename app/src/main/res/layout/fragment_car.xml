@@ -32,12 +32,14 @@
             android:layout_marginStart="@dimen/margin_intermediate"
             android:layout_marginTop="@dimen/margin_x_large"
             android:maxLines="2"
+            style="@style/tv_style_header_text"
             android:text="@string/cars"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/car_list"
+            android:layout_marginTop="@dimen/margin_intermediate"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

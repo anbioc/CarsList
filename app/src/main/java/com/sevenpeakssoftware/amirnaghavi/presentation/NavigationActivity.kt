@@ -28,10 +28,6 @@ class NavigationActivity : DaggerAppCompatActivity() {
 
     private fun makeFullScreen() {
         requestWindowFeature(Window.FEATURE_NO_TITLE)
-        this.window.setFlags(
-            WindowManager.LayoutParams.FLAG_FULLSCREEN,
-            WindowManager.LayoutParams.FLAG_FULLSCREEN
-        )
         supportActionBar?.apply {
             hide()
         }
