@@ -1,8 +1,7 @@
 package com.sevenpeakssoftware.amirnaghavi.base
 
-import androidx.lifecycle.MutableLiveData
 import io.reactivex.Observable
-import io.reactivex.disposables.CompositeDisposable
+import java.lang.IllegalStateException
 
 
 /**
@@ -12,15 +11,13 @@ interface BaseEventHandler<STATE : ViewModelState, PARAM : Param> {
 
     fun isResponsibleTo(event: Any): Boolean
 
-    fun handleEvent(param: PARAM, liveData: MutableLiveData<STATE>, initState: STATE)
+    fun handleEvent(param: PARAM, initState: STATE): Observable<STATE>
     val ID: String
 }
 
 abstract class EventHandler<EVENT : ViewModelEvent, STATE : ViewModelState, PARAM : Param, RESULT>(
-    private val compositeDisposable: CompositeDisposable,
-    private val schedulerProvider: SchedulerProvider
-) :
-    BaseEventHandler<STATE, PARAM> {
+        private val schedulerProvider: SchedulerProvider
+) : BaseEventHandler<STATE, PARAM> {
     /**
      * The core logic will be implemented in this function.
      */
@@ -34,27 +31,23 @@ abstract class EventHandler<EVENT : ViewModelEvent, STATE : ViewModelState, PARA
     /**
      * Wraps all necessary steps to handle the input event, reduces the domain [Answer] to the final UI state.
      */
-    override fun handleEvent(param: PARAM, liveData: MutableLiveData<STATE>, initState: STATE) {
-        liveData.postValue(onIdle(initState))
-        compositeDisposable.add(
+    override fun handleEvent(param: PARAM, initState: STATE): Observable<STATE> =
             triggerAction(param, initState)
-                .subscribe({
-                    when {
-                        it.isSuccess() -> {
-                            liveData.postValue(onSuccess(it, initState))
-                        }
-                        it.isFailure() -> {
-                            liveData.postValue(onFailure(it, initState))
-                        }
-                        else -> {
-                            liveData.postValue(onIdle(initState))
+                    .startWith(Answer.Loading())
+                    .map {
+                        when {
+                            it.isSuccess() -> {
+                                onSuccess(it, initState)
+                            }
+                            it.isFailure() -> {
+                                onFailure(it, initState)
+                            }
+                            else -> {
+                                onIdle(initState)
+                            }
                         }
                     }
-                }, {
 
-                })
-        )
-    }
 
     /**
      * Prepares the [ViewModelState] when result is success.
@@ -76,7 +69,7 @@ abstract class EventHandler<EVENT : ViewModelEvent, STATE : ViewModelState, PARA
  * Contains a list of [EventHandler] objects and manages the overall process of event handling.
  */
 interface BaseCompositeEventHandler<STATE : ViewModelState, PARAM : Param> {
-    fun handleEvent(event: Any, liveData: MutableLiveData<STATE>, param: PARAM, initState: STATE)
+    fun handleEvent(event: Any, param: PARAM, initState: STATE): Observable<STATE>
     fun addHandler(handler: BaseEventHandler<STATE, PARAM>)
 }
 
@@ -84,7 +77,7 @@ interface BaseCompositeEventHandler<STATE : ViewModelState, PARAM : Param> {
  * Holds event handlers list and decide which one is responsible to handle current event.
  */
 abstract class CompositeEventHandler<STATE : ViewModelState, PARAM : Param> :
-    BaseCompositeEventHandler<STATE, PARAM> {
+        BaseCompositeEventHandler<STATE, PARAM> {
 
     private val handlers: MutableList<BaseEventHandler<STATE, PARAM>> = mutableListOf()
     override fun addHandler(handler: BaseEventHandler<STATE, PARAM>) {
@@ -92,15 +85,15 @@ abstract class CompositeEventHandler<STATE : ViewModelState, PARAM : Param> :
     }
 
     override fun handleEvent(
-        event: Any,
-        liveData: MutableLiveData<STATE>,
-        param: PARAM,
-        initState: STATE
-    ) {
+            event: Any,
+            param: PARAM,
+            initState: STATE
+    ): Observable<STATE> {
         handlers.forEach { handler ->
             if (handler.isResponsibleTo(event)) {
-                handler.handleEvent(param, liveData, initState)
+                return handler.handleEvent(param, initState)
             }
         }
+        throw IllegalStateException("handler not found")
     }
 }

@@ -9,15 +9,13 @@ import io.reactivex.subjects.PublishSubject
 /**
  * Base [ViewModel] class responsible to process UI event emissions using State pattern.
  * This view model is developed with the Open-Closed and Single Responsibility principle in mind.
+ * @param eventHandlerManager Encapsulates the logic of holding and controlling event handlers.
  */
-abstract class BaseViewModel<STATE : ViewModelState, EVENT : ViewModelEvent, PARAM : Param> : ViewModel() {
+abstract class BaseViewModel<STATE : ViewModelState, EVENT : ViewModelEvent, PARAM : Param> (
+        private val eventHandlerManager: CompositeEventHandler<STATE, PARAM>
+): ViewModel() {
 
-    protected val compositeDisposable = CompositeDisposable()
-
-    /**
-     * Encapsulates the logic of holding and controlling event handlers.
-     */
-    protected abstract val eventHandlerManager: CompositeEventHandler<STATE, PARAM>
+    private val compositeDisposable = CompositeDisposable()
 
     /**
      * Initial state.
@@ -41,7 +39,11 @@ abstract class BaseViewModel<STATE : ViewModelState, EVENT : ViewModelEvent, PAR
          * Wires up view model event emissions to the composite event handler as the event handler manager.
          */
         eventBridge.map {
-            eventHandlerManager.handleEvent(it.first, _stateLiveData, it.second, initState)
+            eventHandlerManager.handleEvent(it.first, it.second, initState).subscribe { state ->
+                _stateLiveData.postValue(state)
+            }
+        }.doOnSubscribe {
+            compositeDisposable.add(it)
         }.subscribe()
     }
 
