@@ -26,7 +26,7 @@ interface NavigationActivityBinding {
                 CarEventHandler(useCase, schedulerProvider)
 
         @Provides
-        fun provideCarEventHandler(
+        fun provideCarEventCompositeHandler(
                 carEventHandler: EventHandler<GetCarInfoEvent, CarState, CarsParam, List<CarEntity>>
         ): CompositeEventHandler<CarState, CarsParam> = CarEventHandlerManager().apply {
             addHandler(carEventHandler)

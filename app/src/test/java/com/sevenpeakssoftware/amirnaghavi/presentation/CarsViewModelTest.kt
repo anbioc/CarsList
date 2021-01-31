@@ -9,6 +9,7 @@ import com.sevenpeakssoftware.amirnaghavi.domain.entity.CarEntity
 import com.sevenpeakssoftware.amirnaghavi.presentation.car.CarState
 import com.sevenpeakssoftware.amirnaghavi.presentation.car.CarsViewModel
 import com.sevenpeakssoftware.amirnaghavi.presentation.car.GetCarInfoEvent
+import io.reactivex.Observable
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Assert.assertTrue
 import org.junit.Before
@@ -22,28 +23,30 @@ import org.mockito.junit.MockitoJUnitRunner
 @RunWith(MockitoJUnitRunner::class)
 class CarsViewModelTest {
 
-    private lateinit var result: Answer.Success<List<CarEntity>>
-
     @get:Rule
     val rule = InstantTaskExecutorRule()
 
     @Mock
-    lateinit var schedulerProvider: SchedulerProvider
+    lateinit var eventHandlerManager: CompositeEventHandler<CarState, CarsParam>
 
     @Mock
     lateinit var mockCarEntity: CarEntity
-
-    @Mock
-    lateinit var useCase: ObservableUseCase<List<CarEntity>, CarsParam>
 
     @InjectMocks
     lateinit var subject: CarsViewModel
 
     private var historyObserver = HistoryObserver<CarState>()
 
+    private val carParam = CarsParam()
+    private val carEvent = GetCarInfoEvent()
+
+    private val initState = CarState(
+            data = CarState.Data.Idle,
+            baseState = BaseState()
+    )
+
     @Before
     fun setup() {
-        result = listOf(mockCarEntity).toSuccessAnswer()
         subject.stateLiveData.observeForever(historyObserver)
     }
 
@@ -58,8 +61,11 @@ class CarsViewModelTest {
      given
      */
     private fun givenOnGetCarsInfoEvent() {
-        given(useCase.execute(any(), any())).willReturn(
-                result.toObservable()
+        given(eventHandlerManager.handleEvent(any(), any(), any())).willReturn(
+                Observable.just(CarState(
+                        data = CarState.Data.Cars(listOf(mockCarEntity)),
+                        baseState = initState.baseState.noErrorNoLoading()
+                ))
         )
     }
 
@@ -67,7 +73,7 @@ class CarsViewModelTest {
     when
      */
     private fun whenOnHandleGetCarInfoEvent() {
-        subject.handleEvent(GetCarInfoEvent(), CarsParam())
+        subject.handleEvent(carEvent, carParam)
     }
 
     /*
