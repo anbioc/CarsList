@@ -28,6 +28,9 @@ class CarsViewModelTest {
     val rule = InstantTaskExecutorRule()
 
     @Mock
+    lateinit var schedulerProvider: SchedulerProvider
+
+    @Mock
     lateinit var mockCarEntity: CarEntity
 
     @Mock
