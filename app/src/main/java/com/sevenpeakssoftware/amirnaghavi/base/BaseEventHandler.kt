@@ -17,8 +17,7 @@ interface BaseEventHandler<STATE : ViewModelState, PARAM : Param> {
 
 abstract class EventHandler<EVENT : ViewModelEvent, STATE : ViewModelState, PARAM : Param, RESULT>(
         private val schedulerProvider: SchedulerProvider
-) :
-        BaseEventHandler<STATE, PARAM> {
+) : BaseEventHandler<STATE, PARAM> {
     /**
      * The core logic will be implemented in this function.
      */
