@@ -7,7 +7,7 @@ import com.bumptech.glide.Glide
 import com.sevenpeakssoftware.amirnaghavi.databinding.ItemCarBinding
 import com.sevenpeakssoftware.amirnaghavi.domain.entity.CarEntity
 
-class CarsListAdapter() :
+class CarsListAdapter :
     RecyclerView.Adapter<CarItemViewHolder>() {
 
     var itemList: List<CarEntity> = emptyList()

@@ -4,11 +4,13 @@ import io.reactivex.Observable
 
 interface BaseDataSource
 
+
 interface Readable<T, PARAM: Param>: BaseDataSource {
     fun read(param: PARAM): T
 }
 
 interface Writeable<T>: BaseDataSource {
+    fun write(input: T)
 }
 
 interface ReadableAndWriteable<T, R, PARAM: Param>: BaseDataSource{

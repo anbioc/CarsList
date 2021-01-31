@@ -6,7 +6,7 @@ import androidx.lifecycle.LifecycleRegistry
 import androidx.lifecycle.Observer
 
 /**
- * Tracks and saves emitted data from live data to further analysis.
+ * Tracks and records emitted data from live data to further analysis.
  */
 class HistoryObserver<T> : Observer<T>, LifecycleOwner {
     private val lifecycle = LifecycleRegistry(this)
