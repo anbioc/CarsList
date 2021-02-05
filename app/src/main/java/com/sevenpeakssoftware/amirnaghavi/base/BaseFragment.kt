@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
 import com.sevenpeakssoftware.amirnaghavi.extension.observeLiveData
+import com.sevenpeakssoftware.amirnaghavi.util.StringResourceHolder
 import dagger.android.support.AndroidSupportInjection
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
@@ -47,7 +48,7 @@ abstract class BaseFragment<BINDING : ViewBinding,
         _uiStateHandler = createUiStateHandler(binding)
         uiStateHandler.startUp()
         observeLiveData(viewModel.stateLiveData) {
-            uiStateHandler!!.handleState(it)
+            uiStateHandler.handleState(it)
         }
     }
 

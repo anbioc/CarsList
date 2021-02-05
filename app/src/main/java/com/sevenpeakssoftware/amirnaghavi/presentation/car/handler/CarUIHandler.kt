@@ -10,8 +10,11 @@ import com.sevenpeakssoftware.amirnaghavi.presentation.car.CarState
 import com.sevenpeakssoftware.amirnaghavi.presentation.car.CarsListAdapter
 import com.sevenpeakssoftware.amirnaghavi.presentation.car.CarsViewModel
 import com.sevenpeakssoftware.amirnaghavi.presentation.car.GetCarInfoEvent
+import com.sevenpeakssoftware.amirnaghavi.util.StringResourceHolder
 
-class CarUIHandler(binding: FragmentCarBinding, viewModel: CarsViewModel) :
+class CarUIHandler(binding: FragmentCarBinding,
+                   viewModel: CarsViewModel,
+                   private val stringResourceHolder: StringResourceHolder) :
         BaseUIHandler<CarState, CarsViewModel, FragmentCarBinding>(viewModel, binding) {
 
     private val carListAdapter by lazy {
