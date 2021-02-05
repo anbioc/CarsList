@@ -1,4 +1,4 @@
-package com.sevenpeakssoftware.amirnaghavi.presentation.car.event_handler
+package com.sevenpeakssoftware.amirnaghavi.presentation.car.handler
 
 import com.sevenpeakssoftware.amirnaghavi.base.*
 import com.sevenpeakssoftware.amirnaghavi.domain.entity.CarEntity

@@ -12,7 +12,7 @@ class CarsViewModel @Inject constructor(
 
 data class CarState(
     var data: Data = Data.Idle,
-    override var baseState: BaseState = BaseState()
+    override var baseState: CoreState = CoreState()
 ) : ViewModelState() {
     sealed class Data {
         data class Cars(val cars: List<CarEntity>) : Data()

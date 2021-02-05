@@ -4,7 +4,7 @@ package com.sevenpeakssoftware.amirnaghavi.base
 /**
  * Base UI state.
  */
-data class BaseState(
+data class CoreState(
         var error: ErrorEntity = ErrorEntity.NoError,
         var loading: Boolean = true,
 ) {

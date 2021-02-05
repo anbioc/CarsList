@@ -6,14 +6,19 @@ import androidx.lifecycle.ViewModel
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.subjects.PublishSubject
 
+
+abstract class ViewModelContract<STATE : BaseState> : ViewModel() {
+    abstract val stateLiveData: LiveData<STATE>
+}
+
 /**
  * Base [ViewModel] class responsible to process UI event emissions using State pattern.
  * This view model is developed with the Open-Closed and Single Responsibility principle in mind.
  * @param eventHandlerManager Encapsulates the logic of holding and controlling event handlers.
  */
-abstract class BaseViewModel<STATE : ViewModelState, EVENT : ViewModelEvent, PARAM : Param> (
+abstract class BaseViewModel<STATE : ViewModelState, EVENT : ViewModelEvent, PARAM : Param>(
         private val eventHandlerManager: CompositeEventHandler<STATE, PARAM>
-): ViewModel() {
+) : ViewModelContract<STATE>() {
 
     private val compositeDisposable = CompositeDisposable()
 
@@ -26,7 +31,7 @@ abstract class BaseViewModel<STATE : ViewModelState, EVENT : ViewModelEvent, PAR
      * The exit point of the process, each operation would be summed up at this point, resulting to a [ViewModelState]
      */
     private val _stateLiveData: MutableLiveData<STATE> = MutableLiveData()
-    val stateLiveData: LiveData<STATE> get() = _stateLiveData
+    override val stateLiveData: LiveData<STATE> get() = _stateLiveData
 
     /**
      * The starting point of the operation, each [ViewModelEvent] would start it's journey from this point and
@@ -59,9 +64,9 @@ abstract class BaseViewModel<STATE : ViewModelState, EVENT : ViewModelEvent, PAR
     }
 }
 
-abstract class ViewModelState {
-    abstract val ID: String
-    open var baseState: BaseState = BaseState()
+interface BaseState
+abstract class ViewModelState : BaseState {
+    open var baseState: CoreState = CoreState()
 }
 
 interface ViewModelEvent {

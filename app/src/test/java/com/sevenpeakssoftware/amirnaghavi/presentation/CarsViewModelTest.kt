@@ -42,7 +42,7 @@ class CarsViewModelTest {
 
     private val initState = CarState(
             data = CarState.Data.Idle,
-            baseState = BaseState()
+            baseState = CoreState()
     )
 
     @Before
