@@ -60,6 +60,7 @@ abstract class BaseViewModel<STATE : ViewModelState, EVENT : ViewModelEvent, PAR
 }
 
 abstract class ViewModelState {
+    abstract val ID: String
     open var baseState: BaseState = BaseState()
 }
 
