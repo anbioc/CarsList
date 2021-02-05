@@ -7,25 +7,24 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
-import com.sevenpeakssoftware.amirnaghavi.databinding.FragmentCarBinding
 import com.sevenpeakssoftware.amirnaghavi.extension.observeLiveData
-import com.sevenpeakssoftware.amirnaghavi.presentation.car.CarsViewModel
 import dagger.android.support.AndroidSupportInjection
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
 abstract class BaseFragment<BINDING : ViewBinding,
-        UI_STATE : UIStateHandler<STATE>,
+        UI_HANDLER : UIHandler<STATE>,
         VIEW_MODEL : ViewModelContract<STATE>,
         STATE : ViewModelState> : DaggerFragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    var uiStateHandler: UI_STATE? = null
+    private var _uiStateHandler: UI_HANDLER? = null
+    private val uiStateHandler: UI_HANDLER get() = _uiStateHandler!!
 
     private var _binding: BINDING? = null
-    protected val binding: BINDING get() = _binding!!
+    private val binding: BINDING get() = _binding!!
 
     val viewModel: VIEW_MODEL by lazy {
         viewModelFactory.create(createViewModel())
@@ -45,18 +44,41 @@ abstract class BaseFragment<BINDING : ViewBinding,
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        uiStateHandler = createUiStateHandler(binding)
+        _uiStateHandler = createUiStateHandler(binding)
+        uiStateHandler.startUp()
         observeLiveData(viewModel.stateLiveData) {
             uiStateHandler!!.handleState(it)
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        uiStateHandler.onResume()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        uiStateHandler.onPause()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        uiStateHandler.onStart()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        uiStateHandler.onStop()
+    }
+
     override fun onDestroy() {
-        super.onDestroy()
+        uiStateHandler.onDestroy()
         _binding = null
-        uiStateHandler = null
+        _uiStateHandler = null
+        super.onDestroy()
+
     }
 
     abstract fun createBinding(inflater: LayoutInflater, container: ViewGroup?): BINDING
-    abstract fun createUiStateHandler(binding: BINDING): UI_STATE
+    abstract fun createUiStateHandler(binding: BINDING): UI_HANDLER
 }

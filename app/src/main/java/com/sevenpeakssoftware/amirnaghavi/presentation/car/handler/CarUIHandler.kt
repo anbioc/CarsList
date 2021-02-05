@@ -1,9 +1,8 @@
 package com.sevenpeakssoftware.amirnaghavi.presentation.car.handler
 
-import com.sevenpeakssoftware.amirnaghavi.base.BaseUIStateHandler
+import com.sevenpeakssoftware.amirnaghavi.base.BaseUIHandler
 import com.sevenpeakssoftware.amirnaghavi.base.CarsParam
 import com.sevenpeakssoftware.amirnaghavi.base.ErrorEntity
-import com.sevenpeakssoftware.amirnaghavi.base.ViewModelState
 import com.sevenpeakssoftware.amirnaghavi.databinding.FragmentCarBinding
 import com.sevenpeakssoftware.amirnaghavi.domain.entity.CarEntity
 import com.sevenpeakssoftware.amirnaghavi.extension.show
@@ -12,11 +11,15 @@ import com.sevenpeakssoftware.amirnaghavi.presentation.car.CarsListAdapter
 import com.sevenpeakssoftware.amirnaghavi.presentation.car.CarsViewModel
 import com.sevenpeakssoftware.amirnaghavi.presentation.car.GetCarInfoEvent
 
-class CarUIStateHandler(binding: FragmentCarBinding, viewModel: CarsViewModel) :
-        BaseUIStateHandler<CarState, CarsViewModel, FragmentCarBinding>(viewModel, binding) {
+class CarUIHandler(binding: FragmentCarBinding, viewModel: CarsViewModel) :
+        BaseUIHandler<CarState, CarsViewModel, FragmentCarBinding>(viewModel, binding) {
 
     private val carListAdapter by lazy {
         CarsListAdapter()
+    }
+
+    override fun startUp(binding: FragmentCarBinding, viewModel: CarsViewModel) {
+        viewModel.handleEvent(GetCarInfoEvent(), CarsParam())
     }
 
     override fun bindUiState(state: CarState, binding: FragmentCarBinding, viewModel: CarsViewModel) {
@@ -63,5 +66,25 @@ class CarUIStateHandler(binding: FragmentCarBinding, viewModel: CarsViewModel) :
 
     override fun handleLoading(loading: Boolean, binding: FragmentCarBinding) {
         binding.carLoader.show(loading)
+    }
+
+    override fun onResume(binding: FragmentCarBinding, viewModel: CarsViewModel) {
+        // do nothing
+    }
+
+    override fun onStart(binding: FragmentCarBinding, viewModel: CarsViewModel) {
+        // do nothing
+    }
+
+    override fun onPause(binding: FragmentCarBinding, viewModel: CarsViewModel) {
+        // do nothing
+    }
+
+    override fun onStop(binding: FragmentCarBinding, viewModel: CarsViewModel) {
+        // do nothing
+    }
+
+    override fun onDestroy(binding: FragmentCarBinding, viewModel: CarsViewModel) {
+        // do nothing
     }
 }
