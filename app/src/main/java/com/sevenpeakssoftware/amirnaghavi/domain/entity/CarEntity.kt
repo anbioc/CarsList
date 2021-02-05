@@ -1,6 +1,6 @@
 package com.sevenpeakssoftware.amirnaghavi.domain.entity
 
-import com.sevenpeakssoftware.amirnaghavi.base.BaseEntity
+import com.sevenpeakssoftware.amirnaghavi.base.domain.BaseEntity
 
 
 data class CarEntity(
@@ -12,7 +12,7 @@ data class CarEntity(
     val image: String,
     val ingress: String,
     val title: String
-):BaseEntity
+): BaseEntity
 
 data class CarContentEntity(
     val description: String,

@@ -1,8 +1,8 @@
 package com.sevenpeakssoftware.amirnaghavi.di
 
 import com.sevenpeakssoftware.amirnaghavi.base.CarsParam
-import com.sevenpeakssoftware.amirnaghavi.base.ErrorContainer
-import com.sevenpeakssoftware.amirnaghavi.base.ObservableUseCase
+import com.sevenpeakssoftware.amirnaghavi.base.domain.ErrorContainer
+import com.sevenpeakssoftware.amirnaghavi.base.domain.ObservableUseCase
 import com.sevenpeakssoftware.amirnaghavi.base.SchedulerProvider
 import com.sevenpeakssoftware.amirnaghavi.domain.entity.CarEntity
 import com.sevenpeakssoftware.amirnaghavi.domain.repository.CarListRepository

@@ -1,5 +1,6 @@
 package com.sevenpeakssoftware.amirnaghavi.base
 
+import com.sevenpeakssoftware.amirnaghavi.base.domain.Answer
 import io.reactivex.Observable
 
 interface BaseDataSource

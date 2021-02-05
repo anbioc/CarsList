@@ -1,4 +1,4 @@
-package com.sevenpeakssoftware.amirnaghavi.base
+package com.sevenpeakssoftware.amirnaghavi.base.presentation
 
 import android.content.Context
 import android.os.Bundle
@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
 import com.sevenpeakssoftware.amirnaghavi.extension.observeLiveData
-import com.sevenpeakssoftware.amirnaghavi.util.StringResourceHolder
 import dagger.android.support.AndroidSupportInjection
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject

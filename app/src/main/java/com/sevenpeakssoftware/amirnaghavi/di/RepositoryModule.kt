@@ -1,7 +1,7 @@
 package com.sevenpeakssoftware.amirnaghavi.di
 
 import com.sevenpeakssoftware.amirnaghavi.base.CarsParam
-import com.sevenpeakssoftware.amirnaghavi.base.ObservableRepository
+import com.sevenpeakssoftware.amirnaghavi.base.domain.ObservableRepository
 import com.sevenpeakssoftware.amirnaghavi.data.local.data_source.CarsLocalDataSource
 import com.sevenpeakssoftware.amirnaghavi.data.remote.RemoteCarsDataSource
 import com.sevenpeakssoftware.amirnaghavi.domain.entity.CarEntity

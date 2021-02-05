@@ -1,5 +1,6 @@
-package com.sevenpeakssoftware.amirnaghavi.base
+package com.sevenpeakssoftware.amirnaghavi.base.domain
 
+import com.sevenpeakssoftware.amirnaghavi.base.Param
 import io.reactivex.Observable
 
 interface BaseRepository<T, PARAM : Param> {
@@ -7,7 +8,7 @@ interface BaseRepository<T, PARAM : Param> {
 }
 
 abstract class ObservableRepository<T, PARAM : Param> :
-    BaseRepository<Observable<Answer<T>>, PARAM> {
+        BaseRepository<Observable<Answer<T>>, PARAM> {
 
     protected abstract fun getOffline(param: PARAM): Observable<Answer<T>>
     protected abstract fun getRemote(param: PARAM): Observable<Answer<T>>

@@ -1,6 +1,7 @@
-package com.sevenpeakssoftware.amirnaghavi.base
+package com.sevenpeakssoftware.amirnaghavi.base.presentation
 
 import androidx.viewbinding.ViewBinding
+import com.sevenpeakssoftware.amirnaghavi.base.domain.ErrorEntity
 
 
 interface UIHandler<STATE : BaseState> {

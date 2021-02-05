@@ -1,8 +1,9 @@
-package com.sevenpeakssoftware.amirnaghavi.base
+package com.sevenpeakssoftware.amirnaghavi.base.presentation
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.sevenpeakssoftware.amirnaghavi.base.Param
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.subjects.PublishSubject
 

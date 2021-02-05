@@ -1,4 +1,4 @@
-package com.sevenpeakssoftware.amirnaghavi.base
+package com.sevenpeakssoftware.amirnaghavi.base.domain
 
 
 interface ErrorContainer {

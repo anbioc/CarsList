@@ -1,5 +1,8 @@
-package com.sevenpeakssoftware.amirnaghavi.base
+package com.sevenpeakssoftware.amirnaghavi.base.presentation
 
+import com.sevenpeakssoftware.amirnaghavi.base.domain.Answer
+import com.sevenpeakssoftware.amirnaghavi.base.Param
+import com.sevenpeakssoftware.amirnaghavi.base.SchedulerProvider
 import io.reactivex.Observable
 import java.lang.IllegalStateException
 

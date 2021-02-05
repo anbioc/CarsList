@@ -1,5 +1,7 @@
-package com.sevenpeakssoftware.amirnaghavi.base
+package com.sevenpeakssoftware.amirnaghavi.base.domain
 
+import com.sevenpeakssoftware.amirnaghavi.base.Param
+import com.sevenpeakssoftware.amirnaghavi.base.SchedulerProvider
 import io.reactivex.Observable
 import java.util.concurrent.TimeUnit
 
@@ -8,8 +10,8 @@ interface BaseUseCase<T, PARAM : Param> {
 }
 
 abstract class ObservableUseCase<T, PARAM : Param>(
-    private val scheduler: SchedulerProvider,
-    private val errorContainer: ErrorContainer
+        private val scheduler: SchedulerProvider,
+        private val errorContainer: ErrorContainer
 ) : BaseUseCase<Observable<Answer<T>>, PARAM> {
 
     /**

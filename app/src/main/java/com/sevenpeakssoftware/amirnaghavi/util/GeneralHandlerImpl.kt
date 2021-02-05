@@ -2,8 +2,8 @@ package com.sevenpeakssoftware.amirnaghavi.util
 
 import android.util.Log
 import com.jakewharton.retrofit2.adapter.rxjava2.HttpException
-import com.sevenpeakssoftware.amirnaghavi.base.ErrorContainer
-import com.sevenpeakssoftware.amirnaghavi.base.ErrorEntity
+import com.sevenpeakssoftware.amirnaghavi.base.domain.ErrorContainer
+import com.sevenpeakssoftware.amirnaghavi.base.domain.ErrorEntity
 import java.io.IOException
 import java.net.HttpURLConnection
 import javax.inject.Inject

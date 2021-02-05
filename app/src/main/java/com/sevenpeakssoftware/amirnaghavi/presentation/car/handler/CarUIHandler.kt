@@ -1,8 +1,8 @@
 package com.sevenpeakssoftware.amirnaghavi.presentation.car.handler
 
-import com.sevenpeakssoftware.amirnaghavi.base.BaseUIHandler
+import com.sevenpeakssoftware.amirnaghavi.base.presentation.BaseUIHandler
 import com.sevenpeakssoftware.amirnaghavi.base.CarsParam
-import com.sevenpeakssoftware.amirnaghavi.base.ErrorEntity
+import com.sevenpeakssoftware.amirnaghavi.base.domain.ErrorEntity
 import com.sevenpeakssoftware.amirnaghavi.databinding.FragmentCarBinding
 import com.sevenpeakssoftware.amirnaghavi.domain.entity.CarEntity
 import com.sevenpeakssoftware.amirnaghavi.extension.show

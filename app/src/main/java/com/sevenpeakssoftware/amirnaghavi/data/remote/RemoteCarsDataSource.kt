@@ -1,6 +1,8 @@
 package com.sevenpeakssoftware.amirnaghavi.data.remote
 
 import com.sevenpeakssoftware.amirnaghavi.base.*
+import com.sevenpeakssoftware.amirnaghavi.base.domain.Answer
+import com.sevenpeakssoftware.amirnaghavi.base.domain.toSuccessAnswer
 import com.sevenpeakssoftware.amirnaghavi.data.CarsAPI
 import com.sevenpeakssoftware.amirnaghavi.data.dto.CarDTO
 import com.sevenpeakssoftware.amirnaghavi.domain.entity.CarEntity

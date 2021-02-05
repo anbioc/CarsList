@@ -1,4 +1,4 @@
-package com.sevenpeakssoftware.amirnaghavi.base
+package com.sevenpeakssoftware.amirnaghavi.base.presentation
 
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
@@ -30,7 +30,7 @@ class HistoryObserver<T> : Observer<T>, LifecycleOwner {
         throw IllegalArgumentException("History is empty")
     }
 
-    fun assertNotEmpty() : HistoryObserver<T>{
+    fun assertNotEmpty() : HistoryObserver<T> {
         if (history.isEmpty()){
             throw IllegalStateException()
         }

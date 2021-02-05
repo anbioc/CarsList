@@ -1,6 +1,8 @@
 package com.sevenpeakssoftware.amirnaghavi.domain.repository
 
 import com.sevenpeakssoftware.amirnaghavi.base.*
+import com.sevenpeakssoftware.amirnaghavi.base.domain.Answer
+import com.sevenpeakssoftware.amirnaghavi.base.domain.ObservableRepository
 import com.sevenpeakssoftware.amirnaghavi.domain.entity.CarEntity
 import io.reactivex.Observable
 import javax.inject.Inject

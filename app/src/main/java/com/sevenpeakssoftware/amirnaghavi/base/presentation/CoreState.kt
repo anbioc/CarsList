@@ -1,4 +1,6 @@
-package com.sevenpeakssoftware.amirnaghavi.base
+package com.sevenpeakssoftware.amirnaghavi.base.presentation
+
+import com.sevenpeakssoftware.amirnaghavi.base.domain.ErrorEntity
 
 
 /**

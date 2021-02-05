@@ -5,6 +5,9 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.given
 import com.sevenpeakssoftware.amirnaghavi.base.*
+import com.sevenpeakssoftware.amirnaghavi.base.presentation.CompositeEventHandler
+import com.sevenpeakssoftware.amirnaghavi.base.presentation.CoreState
+import com.sevenpeakssoftware.amirnaghavi.base.presentation.HistoryObserver
 import com.sevenpeakssoftware.amirnaghavi.domain.entity.CarEntity
 import com.sevenpeakssoftware.amirnaghavi.presentation.car.CarState
 import com.sevenpeakssoftware.amirnaghavi.presentation.car.CarsViewModel

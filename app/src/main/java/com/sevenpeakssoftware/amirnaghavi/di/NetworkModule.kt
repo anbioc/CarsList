@@ -1,10 +1,9 @@
 package com.sevenpeakssoftware.amirnaghavi.di
 
-import android.content.Context
 import androidx.annotation.NonNull
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import com.sevenpeakssoftware.amirnaghavi.BuildConfig
-import com.sevenpeakssoftware.amirnaghavi.base.ErrorContainer
+import com.sevenpeakssoftware.amirnaghavi.base.domain.ErrorContainer
 import com.sevenpeakssoftware.amirnaghavi.data.CarsAPI
 import com.sevenpeakssoftware.amirnaghavi.util.GeneralHandlerImpl
 import dagger.Module

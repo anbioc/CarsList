@@ -1,6 +1,7 @@
 package com.sevenpeakssoftware.amirnaghavi.presentation.car
 
 import com.sevenpeakssoftware.amirnaghavi.base.*
+import com.sevenpeakssoftware.amirnaghavi.base.presentation.*
 import com.sevenpeakssoftware.amirnaghavi.domain.entity.CarEntity
 import javax.inject.Inject
 
@@ -21,7 +22,7 @@ data class CarState(
     }
 }
 
-class GetCarInfoEvent : ViewModelEvent{
+class GetCarInfoEvent : ViewModelEvent {
     override val ID: String = EventContractID.CAR_EVENT
 }
 

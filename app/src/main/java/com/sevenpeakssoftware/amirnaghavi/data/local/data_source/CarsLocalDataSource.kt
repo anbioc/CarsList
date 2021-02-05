@@ -1,6 +1,9 @@
 package com.sevenpeakssoftware.amirnaghavi.data.local.data_source
 
 import com.sevenpeakssoftware.amirnaghavi.base.*
+import com.sevenpeakssoftware.amirnaghavi.base.domain.Answer
+import com.sevenpeakssoftware.amirnaghavi.base.domain.ErrorEntity
+import com.sevenpeakssoftware.amirnaghavi.base.domain.toSuccessAnswer
 import com.sevenpeakssoftware.amirnaghavi.data.local.CarDao
 import com.sevenpeakssoftware.amirnaghavi.data.local.data.CarItemLocalEntity
 

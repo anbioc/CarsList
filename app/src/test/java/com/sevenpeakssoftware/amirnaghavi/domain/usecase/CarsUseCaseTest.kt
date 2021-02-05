@@ -2,6 +2,7 @@ package com.sevenpeakssoftware.amirnaghavi.domain.usecase
 
 import com.nhaarman.mockitokotlin2.given
 import com.sevenpeakssoftware.amirnaghavi.base.*
+import com.sevenpeakssoftware.amirnaghavi.base.domain.*
 import com.sevenpeakssoftware.amirnaghavi.domain.entity.CarEntity
 import com.sevenpeakssoftware.amirnaghavi.domain.repository.CarListRepository
 import io.reactivex.observers.TestObserver

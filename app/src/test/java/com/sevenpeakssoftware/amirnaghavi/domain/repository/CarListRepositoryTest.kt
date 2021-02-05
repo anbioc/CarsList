@@ -4,6 +4,9 @@ import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.given
 import com.nhaarman.mockitokotlin2.verify
 import com.sevenpeakssoftware.amirnaghavi.base.*
+import com.sevenpeakssoftware.amirnaghavi.base.domain.Answer
+import com.sevenpeakssoftware.amirnaghavi.base.domain.RepositoryStrategy
+import com.sevenpeakssoftware.amirnaghavi.base.domain.toSuccessAnswer
 import com.sevenpeakssoftware.amirnaghavi.data.local.data_source.CarsLocalDataSource
 import com.sevenpeakssoftware.amirnaghavi.data.remote.RemoteCarsDataSource
 import com.sevenpeakssoftware.amirnaghavi.domain.entity.CarEntity

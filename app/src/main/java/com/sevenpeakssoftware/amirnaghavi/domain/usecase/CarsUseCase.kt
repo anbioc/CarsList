@@ -1,6 +1,10 @@
 package com.sevenpeakssoftware.amirnaghavi.domain.usecase
 
 import com.sevenpeakssoftware.amirnaghavi.base.*
+import com.sevenpeakssoftware.amirnaghavi.base.domain.Answer
+import com.sevenpeakssoftware.amirnaghavi.base.domain.ErrorContainer
+import com.sevenpeakssoftware.amirnaghavi.base.domain.ObservableUseCase
+import com.sevenpeakssoftware.amirnaghavi.base.domain.RepositoryStrategy
 import com.sevenpeakssoftware.amirnaghavi.domain.entity.CarEntity
 import com.sevenpeakssoftware.amirnaghavi.domain.repository.CarListRepository
 import io.reactivex.Observable
