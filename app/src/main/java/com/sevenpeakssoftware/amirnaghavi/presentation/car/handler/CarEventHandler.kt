@@ -8,8 +8,8 @@ import com.sevenpeakssoftware.amirnaghavi.base.presentation.CompositeEventHandle
 import com.sevenpeakssoftware.amirnaghavi.base.presentation.EventHandler
 import com.sevenpeakssoftware.amirnaghavi.domain.entity.CarEntity
 import com.sevenpeakssoftware.amirnaghavi.presentation.car.GetCarInfoEvent
-import com.sevenpeakssoftware.amirnaghavi.presentation.car.CarState
 import com.sevenpeakssoftware.amirnaghavi.presentation.car.EventContractID
+import com.sevenpeakssoftware.amirnaghavi.presentation.car.state.CarState
 import io.reactivex.Observable
 import javax.inject.Inject
 

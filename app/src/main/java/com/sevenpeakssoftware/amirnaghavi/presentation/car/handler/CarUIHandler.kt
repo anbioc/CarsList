@@ -8,6 +8,7 @@ import com.sevenpeakssoftware.amirnaghavi.databinding.FragmentCarBinding
 import com.sevenpeakssoftware.amirnaghavi.domain.entity.CarEntity
 import com.sevenpeakssoftware.amirnaghavi.extension.show
 import com.sevenpeakssoftware.amirnaghavi.presentation.car.*
+import com.sevenpeakssoftware.amirnaghavi.presentation.car.state.CarState
 import com.sevenpeakssoftware.amirnaghavi.util.StringResourceHolder
 
 class CarUIHandler(binding: FragmentCarBinding,
@@ -91,5 +92,4 @@ class CarUIHandler(binding: FragmentCarBinding,
     }
 }
 
-class CarUIHandlerManager: CoreUIEventHandlerManager()
 

@@ -86,7 +86,7 @@ interface UIEventHandlerManagerContract {
     fun handleState(state: Any)
 }
 
-abstract class CoreUIEventHandlerManager :
+class CoreUIEventHandlerManager :
         UIEventHandlerManagerContract {
     val _handlers: MutableList<Any> = mutableListOf()
     override val handlers: List<Any> get() = _handlers

@@ -30,11 +30,13 @@ abstract class BaseFragment<BINDING : ViewBinding,
         viewModelFactory.create(createViewModel())
     }
 
-    val stateHandlerManager: UIEventHandlerManagerContract by lazy {
-        createUIHandler()
+    val stateHandlerManager: UIEventHandlerManagerContract = CoreUIEventHandlerManager().apply {
+        createUIHandlerList().forEach {
+            addUIHandler(it)
+        }
     }
 
-    abstract fun createUIHandler(): UIEventHandlerManagerContract
+    abstract fun createUIHandlerList(): List<BaseUIHandler>
 
     abstract fun createViewModel(): Class<VIEW_MODEL>
 

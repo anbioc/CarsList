@@ -6,10 +6,10 @@ import com.sevenpeakssoftware.amirnaghavi.base.presentation.CompositeEventHandle
 import com.sevenpeakssoftware.amirnaghavi.base.presentation.EventHandler
 import com.sevenpeakssoftware.amirnaghavi.domain.entity.CarEntity
 import com.sevenpeakssoftware.amirnaghavi.presentation.car.CarFragment
-import com.sevenpeakssoftware.amirnaghavi.presentation.car.CarState
 import com.sevenpeakssoftware.amirnaghavi.presentation.car.GetCarInfoEvent
 import com.sevenpeakssoftware.amirnaghavi.presentation.car.handler.CarEventHandler
 import com.sevenpeakssoftware.amirnaghavi.presentation.car.handler.CarEventHandlerManager
+import com.sevenpeakssoftware.amirnaghavi.presentation.car.state.CarState
 import dagger.Module
 import dagger.Provides
 import dagger.android.ContributesAndroidInjector
