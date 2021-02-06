@@ -1,22 +1,21 @@
 package com.sevenpeakssoftware.amirnaghavi.presentation.car.handler
 
-import com.sevenpeakssoftware.amirnaghavi.base.presentation.BaseUIHandler
+import com.sevenpeakssoftware.amirnaghavi.base.presentation.CoreUIHandler
 import com.sevenpeakssoftware.amirnaghavi.base.CarsParam
 import com.sevenpeakssoftware.amirnaghavi.base.domain.ErrorEntity
+import com.sevenpeakssoftware.amirnaghavi.base.presentation.CoreUIEventHandlerManager
 import com.sevenpeakssoftware.amirnaghavi.databinding.FragmentCarBinding
 import com.sevenpeakssoftware.amirnaghavi.domain.entity.CarEntity
 import com.sevenpeakssoftware.amirnaghavi.extension.show
-import com.sevenpeakssoftware.amirnaghavi.presentation.car.CarState
-import com.sevenpeakssoftware.amirnaghavi.presentation.car.CarsListAdapter
-import com.sevenpeakssoftware.amirnaghavi.presentation.car.CarsViewModel
-import com.sevenpeakssoftware.amirnaghavi.presentation.car.GetCarInfoEvent
+import com.sevenpeakssoftware.amirnaghavi.presentation.car.*
 import com.sevenpeakssoftware.amirnaghavi.util.StringResourceHolder
 
 class CarUIHandler(binding: FragmentCarBinding,
                    viewModel: CarsViewModel,
                    private val stringResourceHolder: StringResourceHolder) :
-        BaseUIHandler<CarState, CarsViewModel, FragmentCarBinding>(viewModel, binding) {
+        CoreUIHandler<CarState, CarsViewModel, FragmentCarBinding>(viewModel, binding) {
 
+    override val ID: String = CarStateContract.CarState
     private val carListAdapter by lazy {
         CarsListAdapter()
     }
@@ -91,3 +90,6 @@ class CarUIHandler(binding: FragmentCarBinding,
         // do nothing
     }
 }
+
+class CarUIHandlerManager: CoreUIEventHandlerManager()
+

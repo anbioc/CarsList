@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.sevenpeakssoftware.amirnaghavi.base.Param
+import com.sevenpeakssoftware.amirnaghavi.presentation.car.handler.CarUIHandler
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.subjects.PublishSubject
 
@@ -65,9 +66,21 @@ abstract class BaseViewModel<STATE : ViewModelState, EVENT : ViewModelEvent, PAR
     }
 }
 
-interface BaseState
+interface BaseState {
+    val ID: String
+    fun acceptHandlerManager(handler: Any)
+    fun accept(handler: BaseUIHandler)
+}
+
 abstract class ViewModelState : BaseState {
     open var baseState: CoreState = CoreState()
+
+    override fun acceptHandlerManager(handler: Any) {
+        if (handler is UIEventHandlerManagerContract) {
+            handler.handleState(this)
+        }
+    }
+
 }
 
 interface ViewModelEvent {

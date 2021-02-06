@@ -15,7 +15,7 @@ import javax.inject.Inject
 abstract class BaseFragment<BINDING : ViewBinding,
         UI_HANDLER : UIHandler<STATE>,
         VIEW_MODEL : ViewModelContract<STATE>,
-        STATE : ViewModelState> : DaggerFragment() {
+        STATE : ViewModelState>: DaggerFragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -24,11 +24,17 @@ abstract class BaseFragment<BINDING : ViewBinding,
     private val uiStateHandler: UI_HANDLER get() = _uiStateHandler!!
 
     private var _binding: BINDING? = null
-    private val binding: BINDING get() = _binding!!
+    val binding: BINDING get() = _binding!!
 
     val viewModel: VIEW_MODEL by lazy {
         viewModelFactory.create(createViewModel())
     }
+
+    val stateHandlerManager: UIEventHandlerManagerContract by lazy {
+        createUIHandler()
+    }
+
+    abstract fun createUIHandler(): UIEventHandlerManagerContract
 
     abstract fun createViewModel(): Class<VIEW_MODEL>
 
@@ -47,7 +53,7 @@ abstract class BaseFragment<BINDING : ViewBinding,
         _uiStateHandler = createUiStateHandler(binding)
         uiStateHandler.startUp()
         observeLiveData(viewModel.stateLiveData) {
-            uiStateHandler.handleState(it)
+            it.acceptHandlerManager(stateHandlerManager)
         }
     }
 

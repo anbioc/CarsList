@@ -2,10 +2,20 @@ package com.sevenpeakssoftware.amirnaghavi.base.presentation
 
 import androidx.viewbinding.ViewBinding
 import com.sevenpeakssoftware.amirnaghavi.base.domain.ErrorEntity
+import java.lang.IllegalArgumentException
 
+interface BaseUIHandler {
+    val ID: String
+}
 
-interface UIHandler<STATE : BaseState> {
+interface UIHandlerContract<STATE : Any> : BaseUIHandler {
+    fun isResponsibleTo(state: STATE): Boolean
     fun handleState(state: STATE)
+}
+
+interface UIHandler<STATE : ViewModelState> : UIHandlerContract<STATE> {
+    override fun isResponsibleTo(state: STATE) = state.ID == ID
+    override fun handleState(state: STATE)
     fun startUp()
     fun onResume()
     fun onStart()
@@ -14,7 +24,7 @@ interface UIHandler<STATE : BaseState> {
     fun onDestroy()
 }
 
-abstract class BaseUIHandler<STATE : ViewModelState,
+abstract class CoreUIHandler<STATE : ViewModelState,
         VIEW_MODEL : ViewModelContract<STATE>, VIEW_BINDING : ViewBinding>(
         private val viewModel: VIEW_MODEL,
         private val viewBinding: VIEW_BINDING
@@ -70,3 +80,33 @@ abstract class BaseUIHandler<STATE : ViewModelState,
     abstract fun handleLoading(loading: Boolean, binding: VIEW_BINDING)
 }
 
+interface UIEventHandlerManagerContract {
+    val handlers: List<Any>
+    fun addUIHandler(handler: Any)
+    fun handleState(state: Any)
+}
+
+abstract class CoreUIEventHandlerManager :
+        UIEventHandlerManagerContract {
+    val _handlers: MutableList<Any> = mutableListOf()
+    override val handlers: List<Any> get() = _handlers
+
+    override fun addUIHandler(handler: Any) {
+        if (handler is BaseUIHandler){
+            _handlers.add(handler)
+        }else {
+            throw IllegalArgumentException("class just accepts ${BaseUIHandler::class.simpleName} types")
+        }
+    }
+
+    override fun handleState(state: Any) = handlers.forEach {
+        if (it is BaseUIHandler) {
+            if (state is BaseState) {
+                if (it.ID == state.ID) {
+                    state.accept(it)
+                }
+            }
+        }
+
+    }
+}
