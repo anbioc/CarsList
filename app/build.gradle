@@ -10,15 +10,18 @@ android {
     buildToolsVersion "30.0.2"
 
     defaultConfig {
-        applicationId "com.sevenpeakssoftware.amirnaghavi"
+        applicationId "com.multithread.car"
         minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
 
         buildConfigField("String", "BASE_URL", "\"https://www.apphusetreach.no/application/119267/\"")
+        buildConfigField("boolean", "IS_DEMO", "true")
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+
     }
 
 
