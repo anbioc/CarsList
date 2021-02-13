@@ -7,6 +7,6 @@
 
     <fragment
         android:id="@+id/carFragment"
-        android:name="com.sevenpeakssoftware.amirnaghavi.presentation.car.CarFragment"
+        android:name="com.multithread.car.presentation.car.CarFragment"
         android:label="CarFragment" />
 </navigation>
