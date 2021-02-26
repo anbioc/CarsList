@@ -4,27 +4,43 @@ import com.multithread.car.base.domain.Answer
 import io.reactivex.Observable
 import java.lang.IllegalArgumentException
 
-/**
+/*
  * DataSource
+ */
+
+/**
+ * Base strategy data source, all data sources must implement this or it's sub-classes.
  */
 interface BaseStrategyDataSource<INPUT, OUTPUT, PARAM>
 
-interface StrategyReadable<OUTPUT, PARAM> : BaseStrategyDataSource<Nothing, OUTPUT, PARAM> {
+/**
+ * Readable only base strategy data source, it has only read functionality to differentiate
+ * read and write operations.
+ */
+interface StrategyReadableDataSource<OUTPUT, PARAM> : BaseStrategyDataSource<Nothing, OUTPUT, PARAM> {
     fun read(param: PARAM): OUTPUT
 }
 
-interface StrategyWriteable<INPUT, OUTPUT, PARAM> : BaseStrategyDataSource<INPUT, OUTPUT, PARAM> {
+/**
+ * Writeable only base strategy data source, it has only write functionality to differentiate
+ * read and write operations. useful for observer pattern.
+ */
+interface StrategyWriteableDataSource<INPUT, OUTPUT, PARAM> : BaseStrategyDataSource<INPUT, OUTPUT, PARAM> {
     fun write(data: INPUT, param: PARAM)
 }
 
-interface StrategyReadableAndWriteable<INPUT, OUTPUT, PARAM> : BaseStrategyDataSource<INPUT, OUTPUT, PARAM> {
+/**
+ * Writeable and Readable base strategy data source, it has both read and write functionality.
+ * useful for most of the data related operations.
+ */
+interface StrategyReadableAndWriteableDataSource<INPUT, OUTPUT, PARAM> : BaseStrategyDataSource<INPUT, OUTPUT, PARAM> {
     fun write(data: INPUT, param: PARAM)
     fun read(param: PARAM): OUTPUT
 }
 
 
 /**
- * Repository Strategy
+ * Base plugin repository strategy, defines the base contract of plugin repository feature.
  */
 interface PluginRepositoryStrategy<LOCAL_DATA_SOURCE : BaseStrategyDataSource<INPUT, OUTPUT, PARAM>,
         REMOTE_DATA_SOURCE : BaseStrategyDataSource<READABLE_INPUT, OUTPUT, PARAM>, INPUT, READABLE_INPUT, OUTPUT, PARAM> {
@@ -35,19 +51,25 @@ interface PluginRepositoryStrategy<LOCAL_DATA_SOURCE : BaseStrategyDataSource<IN
     ): OUTPUT
 }
 
+/**
+ * Observable base plugin strategy that wraps [RxJava] [Observable] output.
+ */
 interface ObservablePluginRepositoryStrategy<TYPE, PARAM : Param> : PluginRepositoryStrategy<
-        StrategyReadableAndWriteable<TYPE, Observable<Answer<TYPE>>, PARAM>,
-        StrategyReadable<Observable<Answer<TYPE>>, PARAM>,
+        StrategyReadableAndWriteableDataSource<TYPE, Observable<Answer<TYPE>>, PARAM>,
+        StrategyReadableDataSource<Observable<Answer<TYPE>>, PARAM>,
         TYPE,
         Nothing,
         Observable<Answer<TYPE>>,
         PARAM>
 
+/**
+ * Offline first plugin strategy.
+ */
 abstract class OfflineFirstObservablePluginRepositoryStrategy<TYPE, PARAM : Param> :
         ObservablePluginRepositoryStrategy<TYPE, PARAM> {
     override fun invokeStrategy(
-            localDataSource: StrategyReadableAndWriteable<TYPE, Observable<Answer<TYPE>>, PARAM>?,
-            remoteDataSource: StrategyReadable<Observable<Answer<TYPE>>, PARAM>?,
+            localDataSource: StrategyReadableAndWriteableDataSource<TYPE, Observable<Answer<TYPE>>, PARAM>?,
+            remoteDataSource: StrategyReadableDataSource<Observable<Answer<TYPE>>, PARAM>?,
             param: PARAM
     ): Observable<Answer<TYPE>> {
         when {
@@ -71,12 +93,14 @@ abstract class OfflineFirstObservablePluginRepositoryStrategy<TYPE, PARAM : Para
     }
 }
 
-
+/**
+ * Remote plugin strategy.
+ */
 abstract class RemoteObservablePluginRepositoryStrategy<TYPE, PARAM : Param> :
         ObservablePluginRepositoryStrategy<TYPE, PARAM> {
     override fun invokeStrategy(
-            localDataSource: StrategyReadableAndWriteable<TYPE, Observable<Answer<TYPE>>, PARAM>?,
-            remoteDataSource: StrategyReadable<Observable<Answer<TYPE>>, PARAM>?,
+            localDataSource: StrategyReadableAndWriteableDataSource<TYPE, Observable<Answer<TYPE>>, PARAM>?,
+            remoteDataSource: StrategyReadableDataSource<Observable<Answer<TYPE>>, PARAM>?,
             param: PARAM
     ): Observable<Answer<TYPE>> {
         if (remoteDataSource == null)
