@@ -38,8 +38,20 @@ interface StrategyReadableAndWriteableDataSource<INPUT, OUTPUT, PARAM> : BaseStr
     fun read(param: PARAM): OUTPUT
 }
 
+
+
+interface StrategyObservableReadableDataSource<OUTPUT, PARAM> : StrategyReadableDataSource< Observable<Answer<OUTPUT>>, PARAM>
+
+
+/**
+ * Observable Writeable and Readable base strategy data source, it has both read and write functionality.
+ * wrapped into [Observable] object.
+ * useful for most of the data related operations.
+ */
 interface StrategyObservableReadableAndWriteableDataSource<INPUT, OUTPUT, PARAM>:
         StrategyReadableAndWriteableDataSource<INPUT, Observable<Answer<OUTPUT>>, PARAM>
+
+
 
 /**
  * Base plugin repository strategy, defines the base contract of plugin repository feature.

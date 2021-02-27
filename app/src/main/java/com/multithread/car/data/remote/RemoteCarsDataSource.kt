@@ -14,7 +14,8 @@ class RemoteCarsDataSource @Inject constructor(
     private val fakeDataHelper:  ObservableReadable<List<CarEntity>, CarsParam>,
     private val api: CarsAPI,
     private val mapper: Mapper<CarDTO, List<CarEntity>>
-) : ObservableReadable<List<CarEntity>, CarsParam>() {
+) : StrategyObservableReadableDataSource<List<CarEntity>, CarsParam> {
+
     override fun read(param: CarsParam): Observable<Answer<List<CarEntity>>> =
         if (BuildConfig.IS_DEMO){
             fakeDataHelper.read(param)
