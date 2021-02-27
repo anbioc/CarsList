@@ -32,6 +32,6 @@ class DataSourceModule {
     @Provides
     fun bindsLocalDataSource(
         dao: CarDao, mapper: TwoWayMapper<List<CarEntity>, List<CarItemLocalEntity>>
-    ): ObservableReadableAndWriteable<List<CarEntity>, CarsParam> =
+    ): StrategyObservableReadableAndWriteableDataSource<List<CarEntity>, List<CarEntity>, CarsParam> =
         CarsLocalDataSource(dao, mapper)
 }

@@ -14,18 +14,18 @@ import javax.inject.Inject
 class CarsLocalDataSource @Inject constructor(
         private val dao: CarDao,
         private val mapper: TwoWayMapper<List<CarEntity>, List<CarItemLocalEntity>>
-): ObservableReadableAndWriteable<List<CarEntity>, CarsParam>(){
+) : StrategyObservableReadableAndWriteableDataSource<List<CarEntity>, List<CarEntity>, CarsParam> {
 
     override fun read(param: CarsParam): Observable<Answer<List<CarEntity>>> = dao.getCars().map {
-        if(it.isEmpty()){
+        if (it.isEmpty()) {
             Answer.Failure(ErrorEntity.NotFound)
-        }else {
+        } else {
             mapper.mapRightToLeft(it).toSuccessAnswer()
         }
     }
 
-    override fun write(input: List<CarEntity>) =dao.insertCars(
-        mapper.mapLeftToRight(input)
+    override fun write(data: List<CarEntity>, param: CarsParam) = dao.insertCars(
+            mapper.mapLeftToRight(data)
     )
 
 }
