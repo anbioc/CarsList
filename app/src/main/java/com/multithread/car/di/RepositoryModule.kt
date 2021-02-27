@@ -1,11 +1,10 @@
 package com.multithread.car.di
 
-import com.multithread.car.base.CarsParam
-import com.multithread.car.base.domain.ObservableRepository
-import com.multithread.car.data.local.data_source.CarsLocalDataSource
-import com.multithread.car.data.remote.RemoteCarsDataSource
-import com.multithread.car.domain.entity.CarEntity
+
+import com.multithread.car.data.local.data_source.CarsLocalDataSourceAlias
+import com.multithread.car.data.remote.RemoteCarsDataSourceAlias
 import com.multithread.car.domain.repository.CarListRepository
+import com.multithread.car.domain.repository.CarListRepositoryAlias
 import dagger.Module
 import dagger.Provides
 
@@ -13,8 +12,8 @@ import dagger.Provides
 class RepositoryModule {
     @Provides
     fun provideCarRepository(
-            localDataSource: CarsLocalDataSource,
-            remoteCarsDataSource: RemoteCarsDataSource
-    ): ObservableRepository<List<CarEntity>, CarsParam> =
+            localDataSource: CarsLocalDataSourceAlias,
+            remoteCarsDataSource: RemoteCarsDataSourceAlias
+    ): CarListRepositoryAlias =
             CarListRepository(localDataSource, remoteCarsDataSource)
 }

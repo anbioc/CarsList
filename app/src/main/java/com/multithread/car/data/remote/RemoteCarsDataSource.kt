@@ -10,11 +10,14 @@ import com.multithread.car.domain.entity.CarEntity
 import io.reactivex.Observable
 import javax.inject.Inject
 
+
+typealias RemoteCarsDataSourceAlias = StrategyObservableReadableDataSource<List<CarEntity>, CarsParam>
+
 class RemoteCarsDataSource @Inject constructor(
     private val fakeDataHelper:  ObservableReadable<List<CarEntity>, CarsParam>,
     private val api: CarsAPI,
     private val mapper: Mapper<CarDTO, List<CarEntity>>
-) : StrategyObservableReadableDataSource<List<CarEntity>, CarsParam> {
+) : RemoteCarsDataSourceAlias {
 
     override fun read(param: CarsParam): Observable<Answer<List<CarEntity>>> =
         if (BuildConfig.IS_DEMO){

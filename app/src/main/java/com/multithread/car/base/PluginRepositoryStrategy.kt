@@ -127,7 +127,6 @@ abstract class RemoteObservablePluginRepositoryStrategy<TYPE, PARAM : Param> :
 /**
  * Repository
  */
-
 interface BaseStrategyRepository<
         LOCAL_DATA_SOURCE : StrategyReadableAndWriteableDataSource<INPUT, OUTPUT, PARAM>,
         REMOTE_DATA_SOURCE : StrategyReadableDataSource<OUTPUT, PARAM>,
@@ -137,13 +136,13 @@ interface BaseStrategyRepository<
             REMOTE_DATA_SOURCE,
             INPUT,
             OUTPUT,
-            PARAM>): OUTPUT
+            PARAM>,
+    param: PARAM): OUTPUT
 }
 
 abstract class ObservableStrategyRepository<INPUT, OUTPUT, PARAM>(
         private val localDataSource: StrategyObservableReadableAndWriteableDataSource<INPUT, OUTPUT, PARAM>,
         private val remoteDataSource: StrategyObservableReadableDataSource<OUTPUT, PARAM>,
-        private val param: PARAM
 ) : BaseStrategyRepository<
         StrategyObservableReadableAndWriteableDataSource<INPUT, OUTPUT, PARAM>,
         StrategyObservableReadableDataSource<OUTPUT, PARAM>,
@@ -151,24 +150,15 @@ abstract class ObservableStrategyRepository<INPUT, OUTPUT, PARAM>(
         Observable<Answer<OUTPUT>>,
         PARAM
         > {
-    override fun applyStrategy(strategy: PluginRepositoryStrategy<StrategyObservableReadableAndWriteableDataSource<INPUT, OUTPUT, PARAM>, StrategyObservableReadableDataSource<OUTPUT, PARAM>, INPUT, Observable<Answer<OUTPUT>>, PARAM>): Observable<Answer<OUTPUT>> {
+    override fun applyStrategy(
+            strategy: PluginRepositoryStrategy<StrategyObservableReadableAndWriteableDataSource<INPUT, OUTPUT, PARAM>,
+                    StrategyObservableReadableDataSource<OUTPUT, PARAM>, INPUT, Observable<Answer<OUTPUT>>,
+                    PARAM>,
+            param: PARAM
+    ): Observable<Answer<OUTPUT>> =
         strategy.invokeStrategy(
                 localDataSource,
                 remoteDataSource,
                 param
         )
-    }
 }
-
-//typealias BaseObservableCategoryDataSourceAlias =
-//        BaseStrategyDataSource<Observable<ResultResponse<CategoryDomainModel>>, AnyParam>
-//
-//class StrategyObservableCategoryRepository(
-//        private val localDataSource: BaseObservableCategoryDataSourceAlias,
-//        private val remoteDataSource: BaseObservableCategoryDataSourceAlias,
-//        private val param: AnyParam
-//) : ObservableStrategyRepository<CategoryDomainModel, AnyParam>(
-//        localDataSource,
-//        remoteDataSource,
-//        param
-//)

@@ -11,10 +11,12 @@ import com.multithread.car.domain.entity.CarEntity
 import io.reactivex.Observable
 import javax.inject.Inject
 
+typealias CarsLocalDataSourceAlias = StrategyObservableReadableAndWriteableDataSource<List<CarEntity>, List<CarEntity>, CarsParam>
+
 class CarsLocalDataSource @Inject constructor(
         private val dao: CarDao,
         private val mapper: TwoWayMapper<List<CarEntity>, List<CarItemLocalEntity>>
-) : StrategyObservableReadableAndWriteableDataSource<List<CarEntity>, List<CarEntity>, CarsParam> {
+) : CarsLocalDataSourceAlias {
 
     override fun read(param: CarsParam): Observable<Answer<List<CarEntity>>> = dao.getCars().map {
         if (it.isEmpty()) {
