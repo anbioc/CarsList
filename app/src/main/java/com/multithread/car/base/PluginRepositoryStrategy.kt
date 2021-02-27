@@ -39,8 +39,8 @@ interface StrategyReadableAndWriteableDataSource<INPUT, OUTPUT, PARAM> : BaseStr
 }
 
 
-
-interface StrategyObservableReadableDataSource<OUTPUT, PARAM> : StrategyReadableDataSource< Observable<Answer<OUTPUT>>, PARAM>
+interface StrategyObservableReadableDataSource<OUTPUT, PARAM> :
+        StrategyReadableDataSource<Observable<Answer<OUTPUT>>, PARAM>
 
 
 /**
@@ -48,16 +48,17 @@ interface StrategyObservableReadableDataSource<OUTPUT, PARAM> : StrategyReadable
  * wrapped into [Observable] object.
  * useful for most of the data related operations.
  */
-interface StrategyObservableReadableAndWriteableDataSource<INPUT, OUTPUT, PARAM>:
+interface StrategyObservableReadableAndWriteableDataSource<INPUT, OUTPUT, PARAM> :
         StrategyReadableAndWriteableDataSource<INPUT, Observable<Answer<OUTPUT>>, PARAM>
-
 
 
 /**
  * Base plugin repository strategy, defines the base contract of plugin repository feature.
  */
-interface PluginRepositoryStrategy<LOCAL_DATA_SOURCE : BaseStrategyDataSource<INPUT, OUTPUT, PARAM>,
-        REMOTE_DATA_SOURCE : BaseStrategyDataSource<READABLE_INPUT, OUTPUT, PARAM>, INPUT, READABLE_INPUT, OUTPUT, PARAM> {
+interface PluginRepositoryStrategy<
+        LOCAL_DATA_SOURCE : BaseStrategyDataSource<INPUT, OUTPUT, PARAM>,
+        REMOTE_DATA_SOURCE : StrategyReadableDataSource< OUTPUT, PARAM>,
+        INPUT, OUTPUT, PARAM> {
     fun invokeStrategy(
             localDataSource: LOCAL_DATA_SOURCE? = null,
             remoteDataSource: REMOTE_DATA_SOURCE? = null,
@@ -72,7 +73,6 @@ interface ObservablePluginRepositoryStrategy<TYPE, PARAM : Param> : PluginReposi
         StrategyReadableAndWriteableDataSource<TYPE, Observable<Answer<TYPE>>, PARAM>,
         StrategyReadableDataSource<Observable<Answer<TYPE>>, PARAM>,
         TYPE,
-        Nothing,
         Observable<Answer<TYPE>>,
         PARAM>
 
@@ -122,3 +122,53 @@ abstract class RemoteObservablePluginRepositoryStrategy<TYPE, PARAM : Param> :
         return remoteDataSource.read(param)
     }
 }
+
+
+/**
+ * Repository
+ */
+
+interface BaseStrategyRepository<
+        LOCAL_DATA_SOURCE : StrategyReadableAndWriteableDataSource<INPUT, OUTPUT, PARAM>,
+        REMOTE_DATA_SOURCE : StrategyReadableDataSource<OUTPUT, PARAM>,
+        INPUT, OUTPUT, PARAM> {
+    fun applyStrategy(strategy: PluginRepositoryStrategy<
+            LOCAL_DATA_SOURCE,
+            REMOTE_DATA_SOURCE,
+            INPUT,
+            OUTPUT,
+            PARAM>): OUTPUT
+}
+
+abstract class ObservableStrategyRepository<INPUT, OUTPUT, PARAM>(
+        private val localDataSource: StrategyObservableReadableAndWriteableDataSource<INPUT, OUTPUT, PARAM>,
+        private val remoteDataSource: StrategyObservableReadableDataSource<OUTPUT, PARAM>,
+        private val param: PARAM
+) : BaseStrategyRepository<
+        StrategyObservableReadableAndWriteableDataSource<INPUT, OUTPUT, PARAM>,
+        StrategyObservableReadableDataSource<OUTPUT, PARAM>,
+        INPUT,
+        Observable<Answer<OUTPUT>>,
+        PARAM
+        > {
+    override fun applyStrategy(strategy: PluginRepositoryStrategy<StrategyObservableReadableAndWriteableDataSource<INPUT, OUTPUT, PARAM>, StrategyObservableReadableDataSource<OUTPUT, PARAM>, INPUT, Observable<Answer<OUTPUT>>, PARAM>): Observable<Answer<OUTPUT>> {
+        strategy.invokeStrategy(
+                localDataSource,
+                remoteDataSource,
+                param
+        )
+    }
+}
+
+//typealias BaseObservableCategoryDataSourceAlias =
+//        BaseStrategyDataSource<Observable<ResultResponse<CategoryDomainModel>>, AnyParam>
+//
+//class StrategyObservableCategoryRepository(
+//        private val localDataSource: BaseObservableCategoryDataSourceAlias,
+//        private val remoteDataSource: BaseObservableCategoryDataSourceAlias,
+//        private val param: AnyParam
+//) : ObservableStrategyRepository<CategoryDomainModel, AnyParam>(
+//        localDataSource,
+//        remoteDataSource,
+//        param
+//)

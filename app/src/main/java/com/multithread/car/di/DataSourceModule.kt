@@ -26,7 +26,7 @@ class DataSourceModule {
         @Named("fakeDataHelper") fakeDataHelper: ObservableReadable<List<CarEntity>, CarsParam>,
         api: CarsAPI,
         mapper: Mapper<CarDTO, List<CarEntity>>
-    ): ObservableReadable<List<CarEntity>, CarsParam> =
+    ): StrategyObservableReadableDataSource<List<CarEntity>, CarsParam> =
         RemoteCarsDataSource(fakeDataHelper, api, mapper)
 
     @Provides
